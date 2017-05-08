@@ -48,15 +48,16 @@
             <li><a href="classes.php">Classes</a></li>
             <li><a href="blog.php">Blog</a></li>
             <li><a href="pricing.php">Pricing</a></li>
-            <li class="active"><a href="product.php">Products</a>
-                <ul>
-                    <li><a href="shopping-cart.php">Shopping Cart</a></li>
-                </ul>
-            </li>
+            <li class="active"><a href="product.php">Products</a></li>
             <li><a href="contact.php">Contact</a></li>
             <?php
                 if(isset($_SESSION["lname"])){
-                    echo '<li><a href="logout.php">Log Out</a></li>';
+                    echo '<li><a href="#">Hi '.$_SESSION["lname"].'</a>
+                             <ul>
+                                <li><a href="change_password.php">Change password</a></li>
+                                <li><a href="logout.php">Log-out</a></li>
+                             </ul>
+                          </li>';
                 }else{
                     echo ' <li><a href="signin.php">Sign In</a></li>';
                 }

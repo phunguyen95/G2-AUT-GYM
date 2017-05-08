@@ -36,7 +36,14 @@
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
- 
+ <style type="text/css">
+
+    .add{
+        height: 50px;
+        color: white;
+    }
+
+</style>
 </head>
 
 <body>
@@ -55,137 +62,105 @@
       <a class="navbar-brand" href="admin.jsp">SB Admin v2.0</a>
     </div>
     <!-- /.navbar-header -->
-
     <ul class="nav navbar-top-links navbar-right">
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-messages">
-          <li>
-            <a href="#">
-              <div>
-                <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-              </div>
-              <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-            </a>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <a href="#">
-              <div>
-                <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-              </div>
-              <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-            </a>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <a href="#">
-              <div>
-                <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-              </div>
-              <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-            </a>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <a class="text-center" href="#">
-              <strong>Read All Messages</strong>
-              <i class="fa fa-angle-right"></i>
-            </a>
-          </li>
-        </ul>
-        <!-- /.dropdown-messages -->
-      </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-messages">
+            <li>
+              <a href="#"><div><strong>John Smith</strong><span class="pull-right text-muted"><em>Yesterday</em></span></div>
+                          <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="#"><div><strong>John Smith</strong><span class="pull-right text-muted"><em>Yesterday</em></span></div>
+                          <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="#"><div><strong>John Smith</strong><span class="pull-right text-muted"><em>Yesterday</em></span></div>
+                          <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li><a class="text-center" href="#"> <strong>Read All Messages</strong> <i class="fa fa-angle-right"></i></a></li> 
+          </ul>
+          <!-- /.dropdown-messages -->
+        </li>
       <!-- /.dropdown -->
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-tasks">
-          <li>
-            <a href="#">
-              <div>
-                <p>
-                  <strong>Task 1</strong>
-                  <span class="pull-right text-muted">40% Complete</span>
-                </p>
-                <div class="progress progress-striped active">
-                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                    <span class="sr-only">40% Complete (success)</span>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu dropdown-tasks">
+            <li> <a href="#"><div><p><strong>Task 1</strong><span class="pull-right text-muted">40% Complete</span></p>
+                  <div class="progress progress-striped active">
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                      <span class="sr-only">40% Complete (success)</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </a>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <a href="#">
-              <div>
-                <p>
-                  <strong>Task 2</strong>
-                  <span class="pull-right text-muted">20% Complete</span>
-                </p>
-                <div class="progress progress-striped active">
-                  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                    <span class="sr-only">20% Complete</span>
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="#">
+                <div>
+                  <p>
+                    <strong>Task 2</strong>
+                    <span class="pull-right text-muted">20% Complete</span>
+                  </p>
+                  <div class="progress progress-striped active">
+                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                      <span class="sr-only">20% Complete</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </a>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <a href="#">
-              <div>
-                <p>
-                  <strong>Task 3</strong>
-                  <span class="pull-right text-muted">60% Complete</span>
-                </p>
-                <div class="progress progress-striped active">
-                  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                    <span class="sr-only">60% Complete (warning)</span>
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="#">
+                <div>
+                  <p>
+                    <strong>Task 3</strong>
+                    <span class="pull-right text-muted">60% Complete</span>
+                  </p>
+                  <div class="progress progress-striped active">
+                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                      <span class="sr-only">60% Complete (warning)</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </a>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <a href="#">
-              <div>
-                <p>
-                  <strong>Task 4</strong>
-                  <span class="pull-right text-muted">80% Complete</span>
-                </p>
-                <div class="progress progress-striped active">
-                  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                    <span class="sr-only">80% Complete (danger)</span>
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="#">
+                <div>
+                  <p>
+                    <strong>Task 4</strong>
+                    <span class="pull-right text-muted">80% Complete</span>
+                  </p>
+                  <div class="progress progress-striped active">
+                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                      <span class="sr-only">80% Complete (danger)</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </a>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <a class="text-center" href="#">
-              <strong>See All Tasks</strong>
-              <i class="fa fa-angle-right"></i>
-            </a>
-          </li>
-        </ul>
-        <!-- /.dropdown-tasks -->
-      </li>
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a class="text-center" href="#">
+                <strong>See All Tasks</strong>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+          </ul>
+          <!-- /.dropdown-tasks -->
+        </li>
       <!-- /.dropdown -->
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -267,7 +242,7 @@
     </ul>
     <!-- /.navbar-top-links -->
 
-    <div class="navbar-default sidebar" role="navigation">
+       <div class="navbar-default sidebar" role="navigation">
       <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
           <li class="sidebar-search">
@@ -281,13 +256,11 @@
             </div>
             <!-- /input-group -->
           </li>
-          <li>
-            <a href="admin.jsp"><i class="fa fa-dashboard fa-fw"></i> Admin Panel</a>
-          </li>
-          <li><a href="insert.jsp"><i class="fa fa-flag fa-fw"></i> Insert Product</a></li>
-          <li><a href="removeband.jsp"><i class="fa fa-flag fa-fw"></i>Update&Remove Product</a></li>
-          <li><a href="insertband.jsp"><i class="fa fa-flag fa-fw"></i> Insert Brand</a></li>
-          <li><a href="deleteband.jsp"><i class="fa fa-flag fa-fw"></i> Delete Brand</a></li>
+          <li><a href="admin.php"><i class="fa fa-dashboard fa-fw"></i> Admin Panel</a></li>
+          <li><a href="addproduct.php"><i class="fa fa-flag fa-fw"></i> Add Product</a></li>
+          <li><a href="addblog.php"><i class="fa fa-flag fa-fw"></i> Add Blog</a></li>
+          <li><a href="addmembership.php"><i class="fa fa-flag fa-fw"></i> Add Membership</a></li>
+          <li><a href="addtrainer.php"><i class="fa fa-flag fa-fw"></i> Add Trainer</a></li>
           <li>
             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Checkout<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
@@ -297,6 +270,9 @@
               <li>
                 <a href="listorder.jsp">List Order</a>
               </li>
+            </ul>
+            <!-- /.nav-second-level -->
+          </li>
             </ul>
             <!-- /.nav-second-level -->
           </li>
@@ -455,7 +431,7 @@
 <!-- Morris Charts JavaScript -->
 <script src="bower_components/raphael/raphael-min.js"></script>
 <script src="bower_components/morrisjs/morris.min.js"></script>
-<script src="js3/morris-data.js"></script>
+<script src="js/morris-data.js"></script>
 
 <!-- Custom Theme JavaScript -->
 <script src="dist/js/sb-admin-2.js"></script>

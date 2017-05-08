@@ -1,4 +1,6 @@
 
+<?php session_start();?>
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -40,15 +42,21 @@
 		    <li><a href="classes.php">Classes</a></li>
 		    <li><a href="blog.php">Blog</a></li>
 		    <li><a href="pricing.php">Pricing</a></li>
-		    <li><a href="product.php">Products</a></li>
+		    <li><a href="product.php">Shop</a></li>
 		    <li><a href="contact.php">Contact</a></li>
 		    <?php
-		        if(isset($_SESSION["lname"])){
-					echo '<li><a href="logout.php">Log Out</a></li>';
-			    }else{
-					echo ' <li><a href="signin.php">Sign In</a></li>';
-				}
-			?>
+                if(isset($_SESSION["lname"])){
+                    echo '<li><a href="#">Hi '.$_SESSION["lname"].'</a>
+                             <ul>
+                                <li><a href="profile.php">View Profile</a></li>
+                                <li><a href="change_password.php">Change password</a></li>
+                                <li><a href="logout.php">Log-out</a></li>
+                             </ul>
+                          </li>';
+                }else{
+                    echo ' <li><a href="signin.php">Sign In</a></li>';
+                }
+            ?>
 		</ul>
 		<script type="text/javascript" src="js/nav.js"></script>
 	  </div><!-- end h_menu4 -->
@@ -80,203 +88,259 @@
 	    </div>
       </div>
 
-      <div class="container">
+    <div class="container">
        <div class="about_trainer">
 	      <h3 class="m_2">Our Trainers</h3>
-	      <div class="row about_box">
-	      	<div class="col-md-4">
-			  <div class="box1">
-			  	<div class="box1_left">
-					  <img src="images/about_img3.jpg" class="img-responsive" alt=""/>				  		
-				  <div class="desc1">
-					<h3>Trainer 01<br><span class="m_text">Personal Trainer</span></h3>
-					<p>"My sessions are dynamic, interesting and fun-filled!"</p>
-					<div class="coursel_list">
-						<i class="a_heart"> </i>
-						<i class="like1"> </i>
+		     
+    <!--PHP code -->  
+    <?php
+		require_once ('conf/setting.php');
+	    $conn = mysqli_connect($servername, $username, $password, $dbname);
+	    // Check connection
+	    if (!$conn) {
+	        die("Connection failed: " . mysqli_connect_error());
+	    }    
+
+      	$sql = "SELECT * FROM trainer";
+        $result = mysqli_query($conn, $sql);
+
+        while($row = mysqli_fetch_assoc($result)) {
+
+        	switch ($row['trainer_id']){
+        		case 1: 
+        			?>
+        			<div class="row about_box">
+        			<div class="col-md-4">
+					  	<div class="box1">
+						  	<div class="box1_left">
+						  		<?php echo '<img src="'.$row["img"].'" class="img-responsive" alt=""/>';?>	  			  		
+							  	<div class="desc1">
+									<h3><?php echo $row["trainer_name"]; ?><br><span class="m_text"><?php echo $row["trainer_class"]; ?></span></h3>
+									<p>"<?php echo $row["description"]; ?>"</p>
+									<div class="coursel_list">
+										<i class="a_heart"> </i>
+										<i class="like1"> </i>
+									</div>
+									<div class="coursel_list1">
+										<i class="a_twt"> </i>
+										<i class="a_fb"> </i>
+									</div>
+									<div class="clear"></div>
+							 	</div>
+							</div>
+							<div class="box1_right">
+								<h4>Qualifications</h4>
+								<p><?php echo $row["qualification"]; ?></p>
+								<h4>Speciality</h4>
+								<p class="para1"><?php echo $row["speciality"]; ?></p>
+						    </div>
+					    	<div class="clear"></div>
+					 	</div>
 					</div>
-					<div class="coursel_list1">
-						<i class="a_twt"> </i>
-						<i class="a_fb"> </i>
+        			<?php
+        			break;
+        		case 2: 
+        			?>
+        			<div class="col-md-4">
+					    <div class="box2">
+					  		<div class="box1_left">
+							  	<?php echo '<img src="'.$row["img"].'" class="img-responsive" alt=""/>';?>	  				  		
+						  		<div class="desc2">
+								<h3><?php echo $row["trainer_name"]; ?><br><span class="m_text"><?php echo $row["trainer_class"]; ?></span></h3>
+								<p>"<?php echo $row["description"]; ?>"</p>
+								<div class="coursel_list">
+									<i class="heart1"> </i>
+									<i class="like"> </i>
+								</div>
+								<div class="coursel_list1">
+									<i class="twt"> </i>
+									<i class="fb"> </i>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div class="box1_right">
+							<h4 class="right_text">Qualifications</h4>
+							<p class="right_text1"><?php echo $row["qualification"]; ?></p>
+							<h4 class="right_text">Speciality</h4>
+							<p class="right_text2"><?php echo $row["speciality"]; ?></p>	
+					    </div>
+					   <div class="clear"></div>
+					  </div>
 					</div>
-					<div class="clear"></div>
-				 </div>
-				</div>
-				<div class="box1_right">
-					<h4>Qualifications</h4>
-					<p>Bachelor of Sport and Recreation at AUT<br>
-					   Diploma in Fitness Centre Training at AUT<br>
-					   Post Graduate Diploma in Secondary Teaching
-					</p>
-					  <h4>Speciality</h4>
-					 <p class="para1">Group Fitness<br>Weight Loss<br>Mobility and Flexibility<br>Functional Movement<br>High Intensity Interval Training</p>
-			    </div>
-			   <div class="clear"></div>
-			  </div>
-			</div>
-			<div class="col-md-4">
-			  <div class="box2">
-			  	<div class="box1_left">
-					  <img src="images/about_img2.jpg" class="img-responsive" alt=""/>				  		
-				  <div class="desc2">
-					<h3>Trainer 02<br><span class="m_text">Personal Trainer</span></h3>
-					<p>"Make your life, your mind, body and spirit more active."</p>
-					<div class="coursel_list">
-						<i class="heart1"> </i>
-						<i class="like"> </i>
-					</div>
-					<div class="coursel_list1">
-						<i class="twt"> </i>
-						<i class="fb"> </i>
-					</div>
-					<div class="clear"></div>
-				 </div>
-				</div>
-				<div class="box1_right">
-					<h4 class="right_text">Qualifications</h4>
-					<p class="right_text1">Year 2 of Sport and Exercise Science degree<br>REPs Registered Personal Trainer</p>
-					<h4 class="right_text">Speciality</h4>
-					<p class="right_text2">
-					    Injury prevention<br>
-					    Core Conditioning<br>
-					    Weight Loss / Toning<br>
-					    Fitness<br>
-					    Group Fitness<br>
-					    Nutrition<br>
-					    Deep Tissue Sports Massage
-					</p>
-			    </div>
-			   <div class="clear"></div>
-			  </div>
-			</div>
-			<div class="col-md-4">
-			  <div class="box1">
-			  	<div class="box1_left">
-					  <img src="images/about_img4.jpg" class="img-responsive" alt=""/>				  		
-				  <div class="desc1">
-					<h3>Trainer 03<br><span class="m_text">Personal Trainer</span></h3>
-					<p>"I am here to keep you on track while staying accountable to your goals."</p>
-					<div class="coursel_list">
-						<i class="a_heart"> </i>
-						<i class="like1"> </i>
-					</div>
-					<div class="coursel_list1">
-						<i class="a_twt"> </i>
-						<i class="a_fb"> </i>
-					</div>
-					<div class="clear"></div>
-				 </div>
-				</div>
-				<div class="box1_right">
-					<h4>Qualifications</h4>
-					<p>Fitness Instructor/Exercise Consultant<br>
-					    Foundation Skills<br>
-					    REPs Registered 
-					</p>
-					  <h4>Speciality</h4>
-					 <p class="para1">Group Fitness<br>Fitness<br>Core Strength<br>Weight Loss<br>Nutrition<br>Injury Prevention<br>Increased Fitness</p>
-			    </div>
-			   <div class="clear"></div>
-			  </div>
-			</div>
-			<div class="clear"></div>
-	     </div>
-	     <div class="row about_box1">
-	      <div class="col-md-4">
-			  <div class="box2">
-			  	<div class="box1_left">
-					  <img src="images/about_img5.jpg" class="img-responsive" alt=""/>				  		
-				  <div class="desc2">
-					<h3>Trainer 04<br><span class="m_text">Personal Trainer</span></h3>
-					<p>"I will help you discover why loving life involves loving exercise."</p>
-					<div class="coursel_list">
-						<i class="heart1"> </i>
-						<i class="like"> </i>
-					</div>
-					<div class="coursel_list1">
-						<i class="twt"> </i>
-						<i class="fb"> </i>
+        			<?php
+        			break;
+        		case 3: 
+        			?>
+        			<div class="col-md-4">
+					  	<div class="box1">
+						  	<div class="box1_left">
+						  		<?php echo '<img src="'.$row["img"].'" class="img-responsive" alt=""/>';?>	  			  		
+							  	<div class="desc1">
+									<h3><?php echo $row["trainer_name"]; ?><br><span class="m_text"><?php echo $row["trainer_class"]; ?></span></h3>
+									<p>"<?php echo $row["description"]; ?>"</p>
+									<div class="coursel_list">
+										<i class="a_heart"> </i>
+										<i class="like1"> </i>
+									</div>
+									<div class="coursel_list1">
+										<i class="a_twt"> </i>
+										<i class="a_fb"> </i>
+									</div>
+									<div class="clear"></div>
+							 	</div>
+							</div>
+							<div class="box1_right">
+								<h4>Qualifications</h4>
+								<p><?php echo $row["qualification"]; ?></p>
+								<h4>Speciality</h4>
+								<p class="para1"><?php echo $row["speciality"]; ?></p>
+						    </div>
+					    	<div class="clear"></div>
+					 	</div>
 					</div>
 					<div class="clear"></div>
-				 </div>
-				</div>
-				<div class="box1_right">
-					<h4 class="right_text">Qualifications</h4>
-					<p class="right_text1">Bachelor of Sport and Recreation at AUT<br>
-					   Diploma in Fitness Centre Training at AUT<br>
-					   Post Graduate Diploma in Secondary Teaching at AUT
-					</p>
-					<h4 class="right_text">Speciality</h4>
-					<p class="right_text2">Mobility and Flexibility<br>Functional Movement<br>Fitness<br>High Intensity Interval Training</p>
-			    </div>
-			   <div class="clear"></div>
-			  </div>
-			</div>
-			<div class="col-md-4">
-			 <div class="box1">
-			  	<div class="box1_left">
-					  <img src="images/about_img7.jpg" class="img-responsive" alt=""/>				  		
-				  <div class="desc1">
-					<h3>Trainer 05<br><span class="m_text">Personal Trainer</span></h3>
-					<p>"Make it fun, keep it fundamental, and ensure it is functional."</p>
-					<div class="coursel_list">
-						<i class="a_heart"> </i>
-						<i class="like1"> </i>
+	    			</div>
+        			<?php
+        			break;
+        		case 4:
+        			?>
+        			<div class="row about_box1">
+	        			<div class="col-md-4">
+						    <div class="box2">
+						  		<div class="box1_left">
+								  	<?php echo '<img src="'.$row["img"].'" class="img-responsive" alt=""/>';?>	  				  		
+							  		<div class="desc2">
+									<h3><?php echo $row["trainer_name"]; ?><br><span class="m_text"><?php echo $row["trainer_class"]; ?></span></h3>
+									<p>"<?php echo $row["description"]; ?>"</p>
+									<div class="coursel_list">
+										<i class="heart1"> </i>
+										<i class="like"> </i>
+									</div>
+									<div class="coursel_list1">
+										<i class="twt"> </i>
+										<i class="fb"> </i>
+									</div>
+									<div class="clear"></div>
+								</div>
+							</div>
+							<div class="box1_right">
+								<h4 class="right_text">Qualifications</h4>
+								<p class="right_text1"><?php echo $row["qualification"]; ?></p>
+								<h4 class="right_text">Speciality</h4>
+								<p class="right_text2"><?php echo $row["speciality"]; ?></p>	
+						    </div>
+						   <div class="clear"></div>
+						  </div>
+						</div>
+        			<?php
+        			break;
+        		case 5:
+        			?>
+        			<div class="col-md-4">
+					  	<div class="box1">
+						  	<div class="box1_left">
+						  		<?php echo '<img src="'.$row["img"].'" class="img-responsive" alt=""/>';?>	  			  		
+							  	<div class="desc1">
+									<h3><?php echo $row["trainer_name"]; ?><br><span class="m_text"><?php echo $row["trainer_class"]; ?></span></h3>
+									<p>"<?php echo $row["description"]; ?>"</p>
+									<div class="coursel_list">
+										<i class="a_heart"> </i>
+										<i class="like1"> </i>
+									</div>
+									<div class="coursel_list1">
+										<i class="a_twt"> </i>
+										<i class="a_fb"> </i>
+									</div>
+									<div class="clear"></div>
+							 	</div>
+							</div>
+							<div class="box1_right">
+								<h4>Qualifications</h4>
+								<p><?php echo $row["qualification"]; ?></p>
+								<h4>Speciality</h4>
+								<p class="para1"><?php echo $row["speciality"]; ?></p>
+						    </div>
+					    	<div class="clear"></div>
+					 	</div>
 					</div>
-					<div class="coursel_list1">
-						<i class="a_twt"> </i>
-						<i class="a_fb"> </i>
+					
+        			<?php
+        			break;
+        		case 6:
+        			?>
+        			<div class="col-md-4">
+					    <div class="box2">
+					  		<div class="box1_left">
+							  	<?php echo '<img src="'.$row["img"].'" class="img-responsive" alt=""/>';?>	  				  		
+						  		<div class="desc2">
+								<h3><?php echo $row["trainer_name"]; ?><br><span class="m_text"><?php echo $row["trainer_class"]; ?></span></h3>
+								<p>"<?php echo $row["description"]; ?>"</p>
+								<div class="coursel_list">
+									<i class="heart1"> </i>
+									<i class="like"> </i>
+								</div>
+								<div class="coursel_list1">
+									<i class="twt"> </i>
+									<i class="fb"> </i>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div class="box1_right">
+							<h4 class="right_text">Qualifications</h4>
+							<p class="right_text1"><?php echo $row["qualification"]; ?></p>
+							<h4 class="right_text">Speciality</h4>
+							<p class="right_text2"><?php echo $row["speciality"]; ?></p>	
+					    </div>
+					   <div class="clear"></div>
+					  </div>
 					</div>
 					<div class="clear"></div>
-				 </div>
-				</div>
-				<div class="box1_right">
-					<h4>Qualifications</h4>
-					<p>Fitness Instructor/Exercise Consultant<br>Foundation Skills<br>REPs Registered </p>
-					<h4>Speciality</h4>
-					<p class="para1">
-						Injury rehabilitation/prevention<br>Core Conditioning<br>
-					    Fitness<br>Nutrition<br>
-					    Deep Tissue Sports Massage
-					</p>
-			    </div>
-			   <div class="clear"></div>
-			  </div>
-			</div>
-			<div class="col-md-4">
-			  <div class="box2">
-			  	<div class="box1_left">
-					  <img src="images/about_img6.jpg" class="img-responsive" alt=""/>				  		
-				  <div class="desc2">
-					<h3>Trainer 06<br><span class="m_text">Personal Trainer</span></h3>
-					<p>"I want to show you how simple mind shifts can make dramatic life changes."</p>
-					<div class="coursel_list">
-						<i class="heart1"> </i>
-						<i class="like"> </i>
-					</div>
-					<div class="coursel_list1">
-						<i class="twt"> </i>
-						<i class="fb"> </i>
-					</div>
-					<div class="clear"></div>
-				 </div>
-				</div>
-				<div class="box1_right">
-					<h4 class="right_text">Qualifications</h4>
-					<p class="right_text1">Bachelor of Sport and Recreation at AUT<br>
-					   Diploma in Fitness Centre Training at AUT<br>
-					   Post Graduate Diploma in Secondary Teaching at AUT
-					</p>
-					<h4 class="right_text">Speciality</h4>
-					<p class="right_text2">Mobility and Flexibility<br>Functional Movement<br>Nutrition<br>High Intensity Interval Training</p>
-			    </div>
-			   <div class="clear"></div>
-			  </div>
-			</div>
-			<div class="clear"></div>
-	     </div>
+	    			</div>
+        			<?php
+        			break;
+
+        			default:
+        				?>
+	        			<div class="row about_box">
+	        			<div class="col-md-4">
+						  	<div class="box1">
+							  	<div class="box1_left">
+							  		<?php echo '<img src="'.$row["img"].'" class="img-responsive" alt=""/>';?>	  			  		
+								  	<div class="desc1">
+										<h3><?php echo $row["trainer_name"]; ?><br><span class="m_text"><?php echo $row["trainer_class"]; ?></span></h3>
+										<p>"<?php echo $row["description"]; ?>"</p>
+										<div class="coursel_list">
+											<i class="a_heart"> </i>
+											<i class="like1"> </i>
+										</div>
+										<div class="coursel_list1">
+											<i class="a_twt"> </i>
+											<i class="a_fb"> </i>
+										</div>
+										<div class="clear"></div>
+								 	</div>
+								</div>
+								<div class="box1_right">
+									<h4>Qualifications</h4>
+									<p><?php echo $row["qualification"]; ?></p>
+									<h4>Speciality</h4>
+									<p class="para1"><?php echo $row["speciality"]; ?></p>
+							    </div>
+						    	<div class="clear"></div>
+						 	</div>
+						</div>
+						<div class="clear"></div>
+	    				</div>
+	        			<?php
+	        	} 		
+        	} 	
+		?>
+	    
 	   </div>
     </div>
+    <?php mysqli_close($conn);?>
    	<div class="login">
     <?php require "why-join.php"; ?>
     </div>

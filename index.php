@@ -7,7 +7,7 @@
 		if (!$conn) {
 		    die("Connection failed: " . mysqli_connect_error());
 		}
-		mysqli_close($conn);
+	
 		
 ?>
 <!DOCTYPE HTML>
@@ -59,7 +59,7 @@
 		<h2>Gyms, Fitness, Sports and more</h2>
 		<p>Check out our timetable for many available classes with our experienced personal trainers and qualified experts, we are here to ready to help you achieve your goals</p>
 		<div class="banner_btn">
-			<a href="#">Find more</a>
+			<a href="trainers.php">Find more</a>
 		</div>
 	  </div>
 	  <div class="header-arrow">
@@ -82,17 +82,26 @@
 	<div class="h_menu4"><!-- start h_menu4 -->
 	    <a class="toggleMenu" href="#">Menu</a>
 		<ul class="nav">
-		    <li class="active"><a href="index.php">Home</a></li>
+		    <li class="active"><a href="index.php">Home</a> </li>
+		    	
+		   
+
 		    <li><a href="about.php">About</a></li>
 		    <li><a href="trainers.php">Trainers</a></li>
 		    <li><a href="classes.php">Classes</a></li>
 		    <li><a href="blog.php">Blog</a></li>
 		    <li><a href="pricing.php">Pricing</a></li>
-		    <li><a href="product.php">Products</a></li>
+		    <li><a href="product.php">Shop</a></li>
 		    <li><a href="contact.php">Contact</a></li>
 		    <?php
 		        if(isset($_SESSION["lname"])){
-					echo '<li><a href="logout.php">Log Out</a></li>';
+					echo '<li><a href="#">Hi '.$_SESSION["lname"].'</a>
+							 <ul>
+							 	<li><a href="profile.php">Your Profile</a></li>
+							 	<li><a href="change_password.php">Change password</a></li>
+							 	<li><a href="logout.php">Log-out</a></li>
+							 </ul>
+						  </li>';
 			    }else{
 					echo ' <li><a href="signin.php">Sign In</a></li>';
 				}
@@ -169,171 +178,72 @@
 		  <?php require "content-middle-row.php";?>
 
 		 <div class="row content_middle_bottom">
-			  <div class="col-md-4">
-		        <h3 class="m_2">Our Trainers</h3>
-		         <div class="course_demo">
-		          <ul id="flexiselDemo3">	
-					<li><img src="images/pic4.jpg" /><div class="desc">
-						<h3>Lorem Ipsum<br><span class="m_text">Spinning</span></h3>
-						<p>Lorem ipsum dolor<br> sit amet, consectetuer.</p>
-						<div class="coursel_list">
-							<i class="heart1"> </i>
-							<i class="like"> </i>
-						</div>
-						<div class="coursel_list1">
-							<i class="twt"> </i>
-							<i class="fb"> </i>
-						</div>
-						<div class="clear"></div>
-					</div></li>
-					<li><img src="images/pic5.jpg" /><div class="desc">
-						<h3>Lorem Ipsum<br><span class="m_text">Kik Boxing</span></h3>
-						<p>Lorem ipsum dolor<br> sit amet, consectetuer.</p>
-						<div class="coursel_list">
-							<i class="heart2"> </i>
-							<i class="like1"> </i>
-						</div>
-						<div class="coursel_list1">
-							<i class="twt"> </i>
-							<i class="fb"> </i>
-						</div>
-						<div class="clear"></div>
-					</div></li>	
-					<li><img src="images/pic4.jpg" /><div class="desc">
-						<h3>Lorem Ipsum<br><span class="m_text">Spinning</span></h3>
-						<p>Lorem ipsum dolor<br> sit amet, consectetuer.</p>
-						<div class="coursel_list">
-							<i class="heart2"> </i>
-							<i class="like1"> </i>
-						</div>
-						<div class="coursel_list1">
-							<i class="twt"> </i>
-							<i class="fb"> </i>
-						</div>
-						<div class="clear"></div>
-					</div></li>	
-					<li><img src="images/pic5.jpg" /><div class="desc">
-						<h3>Lorem Ipsum<br><span class="m_text">Kik Boxing</span></h3>
-						<p>Lorem ipsum dolor<br> sit amet, consectetuer.</p>
-						<div class="coursel_list">
-							<i class="heart2"> </i>
-							<i class="like1"> </i>
-						</div>
-						<div class="coursel_list1">
-							<i class="twt"> </i>
-							<i class="fb"> </i>
-						</div>
-						<div class="clear"></div>
-					</div></li>	
-					<li><img src="images/pic4.jpg" /><div class="desc">
-						<h3>Lorem Ipsum<br><span class="m_text">Spinning</span></h3>
-						<p>Lorem ipsum dolor<br> sit amet, consectetuer.</p>
-						<div class="coursel_list">
-							<i class="heart2"> </i>
-							<i class="like1"> </i>
-						</div>
-						<div class="coursel_list1">
-							<i class="twt"> </i>
-							<i class="fb"> </i>
-						</div>
-						<div class="clear"></div>
-					</div></li>							    	  	       	   	    	
-				</ul>
-				<script type="text/javascript">
-					$(window).load(function() {
-						$("#flexiselDemo3").flexisel({
-							visibleItems: 4,
-							animationSpeed: 1000,
-							autoPlay: true,
-							autoPlaySpeed: 3000,    		
-							pauseOnHover: true,
-							enableResponsiveBreakpoints: true,
-					    	responsiveBreakpoints: { 
-					    		portrait: { 
-					    			changePoint:480,
-					    			visibleItems: 1
-					    		}, 
-					    		landscape: { 
-					    			changePoint:640,
-					    			visibleItems: 2
-					    		},
-					    		tablet: { 
-					    			changePoint:768,
-					    			visibleItems: 2
-					    		}
-					    	}
-					    });
-					    
-					});
-				</script>
-		<script type="text/javascript" src="js/jquery.flexisel.js"></script>
-	  </div>
-     </div>
-     <div class="col-md-4">
-     	 <h3 class="m_2">Next Events</h3>
-     	 <div class="events">
-     	 	<div class="event-top">
-	     	 	<ul class="event1">
-	     	 		<h4>26 April, 2014</h4>
-	     	 		<img src="images/pic.jpg" alt=""/>
-	     	 	</ul>
-	     	 	<ul class="event1_text">
-	     	 		<span class="m_5">h.12.00-h.13.00</span>
-	     	 		<h4>Aerobics</h4>
-	     	 		<br>
-	     	 		<div class="btn2">
-					   <a href="#">Reservation</a>
-					</div>
-	     	 	</ul>
-     	 		<div class="clear"></div>
-     	 	</div>
-     	 	<div class="event-bottom">
-	     	 	<ul class="event1">
-	     	 		<h4>26 April, 2014</h4>
-	     	 		<img src="images/pic.jpg" alt=""/>
-	     	 	</ul>
-	     	 	<ul class="event1_text">
-	     	 		<span class="m_5">h.12.00-h.13.00</span>
-	     	 		<h4>Spinning</h4>
-	     	 		<br>
-	     	 		<div class="btn2">
-					   <a href="#">Reservation</a>
-					</div>
-	     	 	</ul>
-     	 		<div class="clear"></div>
-     	 	</div>
-     	 </div>
-     </div>
-     <div class="col-md-4">
-     	 <h3 class="m_2">From the blog</h3>
-     	 <div class="blog_events">
-     	 	<ul class="tab-left1">
-				<span class="tab1-img"><img src="images/pic7.jpg" alt=""></span>
-				<div class="tab-text1">
-				 <p><a href="#">Really enjoyable and refresh my mind.</a></p>
-				 <span class="m_date">25 April, 2014</span>
-				</div>
-				<div class="clear"></div>
-			</ul>
-			<ul class="tab-left1">
-				<span class="tab1-img"><img src="images/pic6.jpg" alt=""></span>
-				<div class="tab-text1">
-				 <p><a href="#">Sweet and lovely people!</a></p>
-				 <span class="m_date">25 April, 2014</span>
-				</div>
-				<div class="clear"></div>
-			</ul>
-			<ul class="tab-last1">
-				<span class="tab1-img"><img src="images/pic8.jpg" alt=""></span>
-				<div class="tab-text1">
-				 <p><a href="#">No pain no gain</a></p>
-				 <span class="m_date">25 April, 2014</span>
-				</div>
-				<div class="clear"></div>
-			</ul>
-     	 </div>
-     </div>
-     <div class="clear"></div>
+			<?php require "small_trainer_box.php";?>
+     		<div class="col-md-4">
+			     	 <h3 class="m_2">Next Events</h3>
+			     	 <div class="events">
+			     	 	<div class="event-top">
+				     	 	<ul class="event1">
+				     	 		<h4>26 April, 2014</h4>
+				     	 		<img src="images/pic.jpg" alt=""/>
+				     	 	</ul>
+				     	 	<ul class="event1_text">
+				     	 		<span class="m_5">h.12.00-h.13.00</span>
+				     	 		<h4>Aerobics</h4>
+				     	 		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,. </p>
+				     	 		<div class="btn2">
+								   <a href="#">Reservation</a>
+								</div>
+				     	 	</ul>
+			     	 		<div class="clear"></div>
+			     	 	</div>
+			     	 	<div class="event-bottom">
+				     	 	<ul class="event1">
+				     	 		<h4>26 April, 2014</h4>
+				     	 		<img src="images/pic.jpg" alt=""/>
+				     	 	</ul>
+				     	 	<ul class="event1_text">
+				     	 		<span class="m_5">h.12.00-h.13.00</span>
+				     	 		<h4>Spinning</h4>
+				     	 		<p>Lorem ipsum dolor sit amet. </p>
+				     	 		<div class="btn2">
+								   <a href="#">Reservation</a>
+								</div>
+				     	 	</ul>
+			     	 		<div class="clear"></div>
+			     	 	</div>
+			     	 </div>
+			       </div>
+			       <div class="col-md-4">
+			     	 <h3 class="m_2">From the blog</h3>
+			     	 <div class="blog_events">
+			     	 	<ul class="tab-left1">
+							<span class="tab1-img"><img src="images/pic7.jpg" alt=""></span>
+							<div class="tab-text1">
+							 <p><a href="#">nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip</a></p>
+							 <span class="m_date">25 April, 2014</span>
+							</div>
+							<div class="clear"></div>
+						</ul>
+						<ul class="tab-left1">
+							<span class="tab1-img"><img src="images/pic6.jpg" alt=""></span>
+							<div class="tab-text1">
+							 <p><a href="#">soluta nobis eleifend option congue nihil imperdiet doming id</a></p>
+							 <span class="m_date">25 April, 2014</span>
+							</div>
+							<div class="clear"></div>
+						</ul>
+						<ul class="tab-last1">
+							<span class="tab1-img"><img src="images/pic8.jpg" alt=""></span>
+							<div class="tab-text1">
+							 <p><a href="#">quod mazim placerat facer possim assum. Typi non habent</a></p>
+							 <span class="m_date">25 April, 2014</span>
+							</div>
+							<div class="clear"></div>
+						</ul>
+			     	 </div>
+			        </div>
+     		<div class="clear"></div>
      </div>
       <div class="row about">
 		 <div class="col-md-8">
@@ -427,9 +337,7 @@
 			 </ul>
 		    </div>
 		</div>
-		<div class="footer-top">
-		 	<br>
-		</div>
+		
 		<?php require "footer.php"; ?>
 </body>
 </html>

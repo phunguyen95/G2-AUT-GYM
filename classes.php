@@ -1,4 +1,4 @@
-
+<?php session_start();?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -41,8 +41,21 @@
 				 </ul></li>
 			   <li><a href="blog.php">Blog</a></li>
 			   <li><a href="pricing.php">Pricing</a></li>
-			   <li><a href="product.php">Product</a></li>
+			    <li><a href="product.php">Shop</a></li>
 			   <li><a href="contact.php">Contact</a></li>
+			   <?php
+                if(isset($_SESSION["lname"])){
+                    echo '<li><a href="#">Hi '.$_SESSION["lname"].'</a>
+                             <ul>
+                                <li><a href="profile.php">View Profile</a></li>
+                                <li><a href="change_password.php">Change password</a></li>
+                                <li><a href="logout.php">Log-out</a></li>
+                             </ul>
+                          </li>';
+                }else{
+                    echo ' <li><a href="signin.php">Sign In</a></li>';
+                }
+            ?>
 			 </ul>
 			  <script type="text/javascript" src="js/nav.js"></script>
 		  </div><!-- end h_menu4 -->
@@ -57,158 +70,90 @@
 		<div class="border"> </div> 
 		 <div class="container">
 		   <div class="classes_wrapper">
-		 	<div class="row class_box">
- 			  <div class="col-md-6">
-				<div class="class_left">
-					<a href="single_class.php"><img src="images/c7.jpg" class="img-responsive" alt=""/ title="continue"></a>
-				</div>
-				<div class="class_right">
-					<h3>Kik Boxing</h3>
-					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy.</p>
-					<div class="class_img">
-					  <img src="images/c2.jpg" alt=""/>
-					  <div class="class_desc">
-					  	<h4>Trainer</h4>
-					  	<h5>laoreet dolore</h5>
-					  	<p>iusto odio dignissim</p>
-					  </div>
-					    <div class="clear"></div>
-					     <ul class="buttons_class">
-					  	 <li class="btn5"><a href="#">Read More</a></li>	
-				         <li class="btn6"><a href="#">Timetable</a></li>	
-			            <div class="clear"></div>
-			         </ul>
+
+		   <?php
+		   require_once ('conf/setting.php');
+		    $conn = mysqli_connect($servername, $username, $password, $dbname);
+		    // Check connection
+		    if (!$conn) {
+		        die("Connection failed: " . mysqli_connect_error());
+		    }    
+
+		  	$sql = "SELECT * FROM trainer";
+		    $result = mysqli_query($conn, $sql);
+
+		    while($row = mysqli_fetch_assoc($result)){
+		    	switch ($row['trainer_id']){
+		    		case 1: case 3: case 5 : case 7: case 9:
+		    		?>
+		    		<div class="row class_box">		    		
+		    		<div class="col-md-6">
+						<div class="class_left">
+							<a href="single_class.php"><?php echo '<img src="'.$row["img2"].'" class="img-responsive" alt=""/ title="continue">'?></a>
+						</div>
+						<div class="class_right">
+							<h3><?php echo $row["trainer_class"]; ?></h3>
+							<p><?php echo $row["description"];?></p>
+							<div class="class_img">
+							  <?php echo '<img src="'.$row['img'].'" alt=""/>';?>
+							  <div class="class_desc">
+							  	<h4>TRAINER</h4>
+							  	<h5><?php echo $row['trainer_name'];?></h5>
+							  	<p>Enjoy!</p>
+							  </div>
+							    <div class="clear"></div>
+							     <ul class="buttons_class">
+							  	 <li class="btn5"><a href="about.php">Read More</a></li>	
+						         <li class="btn6"><a href="trainers.php">Timetable</a></li>	
+					            <div class="clear"></div>
+					         </ul>
+							</div>
+						</div>
+						<div class="clear"></div>
 					</div>
-				</div>
-				<div class="clear"></div>
-			  </div>	
-			   <div class="col-md-6">
-				<div class="class_left">
-					<a href="single_class.php"><img src="images/c1.jpg" class="img-responsive" alt=""/ title="continue"></a>
-				</div>
-				<div class="class_right1">
-					<h3>Spinning</h3>
-					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy.</p>
-					<div class="class_img">
-					  <img src="images/c8.jpg" alt=""/>
-					  <div class="class_desc1">
-					  	<h4>Trainer</h4>
-					  	<h5>laoreet dolore</h5>
-					  	<p>iusto odio dignissim</p>
-					  </div>
-					   <div class="clear"></div>
-					   <ul class="buttons_class">
-					  	 <li class="btn7"><a href="#">Read More</a></li>	
-				         <li class="btn8"><a href="#">Timetable</a></li>	
-			            <div class="clear"></div>
-			           </ul>
+
+		    		<?php
+		    		break;
+
+		    		case 2: case 4: case 6: case 8: case 10:
+		    		?>
+		    		<div class="col-md-6">
+						<div class="class_left">
+							<a href="single_class.php"><?php echo '<img src="'.$row["img2"].'" class="img-responsive" alt=""/ title="continue">'?></a>
+						</div>
+						<div class="class_right1">
+							<h3><?php echo $row["trainer_class"]; ?></h3>
+							<p><?php echo $row["description"];?></p>
+							<div class="class_img">
+							  <?php echo '<img src="'.$row['img'].'" alt=""/>';?>
+							  <div class="class_desc1">
+							  	<h4>TRAINERr</h4>
+							  	<h5><?php echo $row['trainer_name'];?></h5>
+							  	<p>Enjoy!</p>
+							  </div>
+							   <div class="clear"></div>
+							   <ul class="buttons_class">
+							  	  <li class="btn5"><a href="about.php">Read More</a></li>	
+						          <li class="btn6"><a href="trainers.php">Timetable</a></li>	
+					            <div class="clear"></div>
+					           </ul>
+							</div>
+						</div>
 					</div>
-				  </div>
-			    </div>
-			  <div class="clear"></div>
-			 </div>	
-			 <div class="row class_box">
- 			   <div class="col-md-6">
-				<div class="class_left">
-					<a href="single_class.php"><img src="images/c6.jpg" class="img-responsive" alt=""/ title="continue"></a>
-				</div>
-				<div class="class_right">
-					<h3>Crossfit</h3>
-					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy.</p>
-					<div class="class_img">
-					  <img src="images/c9.jpg" alt=""/>
-					  <div class="class_desc">
-					  	<h4>Trainer</h4>
-					  	<h5>laoreet dolore</h5>
-					  	<p>iusto odio dignissim</p>
-					  </div>
-					    <div class="clear"></div>
-					     <ul class="buttons_class">
-					  	 <li class="btn5"><a href="#">Read More</a></li>	
-				         <li class="btn6"><a href="#">Timetable</a></li>	
-			            <div class="clear"></div>
-			         </ul>
-					</div>
-				</div>
-				<div class="clear"></div>
-			  </div>	
-			   <div class="col-md-6">
-				<div class="class_left">
-					<a href="single_class.php"><img src="images/c5.jpg" class="img-responsive" alt=""/ title="continue"></a>
-				</div>
-				<div class="class_right1">
-					<h3>Aerobics</h3>
-					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy.</p>
-					<div class="class_img">
-					  <img src="images/c10.jpg" alt=""/>
-					  <div class="class_desc1">
-					  	<h4>Trainer</h4>
-					  	<h5>laoreet dolore</h5>
-					  	<p>iusto odio dignissim</p>
-					  </div>
-					   <div class="clear"></div>
-					   <ul class="buttons_class">
-					  	 <li class="btn7"><a href="#">Read More</a></li>	
-				         <li class="btn8"><a href="#">Timetable</a></li>	
-			            <div class="clear"></div>
-			           </ul>
-					</div>
-				 </div>
-			    </div>
-			   <div class="clear"></div>
-			 </div>	
-			 <div class="row class_box1">
- 			  <div class="col-md-6">
-				<div class="class_left">
-					<a href="single_class.html"><img src="images/c3.jpg"  class="img-responsive" alt=""/ title="continue"></a>
-				</div>
-				<div class="class_right">
-					<h3>Cardio Fitness</h3>
-					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy.</p>
-					<div class="class_img">
-					  <img src="images/c11.jpg" alt=""/>
-					  <div class="class_desc">
-					  	<h4>Trainer</h4>
-					  	<h5>laoreet dolore</h5>
-					  	<p>iusto odio dignissim</p>
-					  </div>
-					    <div class="clear"></div>
-					     <ul class="buttons_class">
-					  	 <li class="btn5"><a href="#">Read More</a></li>	
-				         <li class="btn6"><a href="#">Timetable</a></li>	
-			            <div class="clear"></div>
-			         </ul>
-					</div>
-				  </div>
-				<div class="clear"></div>
-			  </div>	
-			   <div class="col-md-6">
-				<div class="class_left">
-					<a href="single_class.html"><img src="images/c4.jpg" class="img-responsive"  alt=""/ title="continue"></a>
-				</div>
-				<div class="class_right1">
-					<h3>Yoga</h3>
-					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy.</p>
-					<div class="class_img">
-					  <img src="images/c12.jpg" alt=""/>
-					  <div class="class_desc1">
-					  	<h4>Trainer</h4>
-					  	<h5>laoreet dolore</h5>
-					  	<p>iusto odio dignissim</p>
-					  </div>
-					   <div class="clear"></div>
-					   <ul class="buttons_class">
-					  	 <li class="btn7"><a href="#">Read More</a></li>	
-				         <li class="btn8"><a href="#">Timetable</a></li>	
-			            <div class="clear"></div>
-			           </ul>
-					</div>
-				</div>
-			   </div>
-			   <div class="clear"></div>
-			 </div>	
-			<div class="clear"></div> 	   		
+					<div class="clear"></div>
+			 		</div>	
+		    		<?php
+		    		break;
+		    	}
+
+		    }
+		    mysqli_close($conn);
+
+		   ?>
+
+		   <div class="clear"></div> 	   		
 		   </div>
+
 		   <div class="row classes_bottom">
 		      <div class="col-md-8">
 		     	 <h3 class="m_2">All Classes</h3>

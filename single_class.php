@@ -69,9 +69,9 @@
 				    <ul class=single_grid>
 				    	<li class="grid1">
 				    	  <h3 class="m_13">Trainer</h3>
-				    	  <img src="images/s2.jpg" class="img-responsive" alt=""/>
-						  <h4>Lorem Ipsum<br><span class="m_text">Spinning</span></h4>
-						  <p>Lorem ipsum dolor sit amet, consectetuer.</p>
+				    	  <img src="images/trainer/nick.jpg" class="img-responsive" alt=""/>
+						  <h4>Nick jury<br><span class="m_text">Spinning</span></h4>
+						  <p>Injury prevention, Core Conditioning, Weight Loss</p>
 				    	</li>
 				    	<li class="grid2">
 				    	   <h3 class="m_13">Featured</h3>
@@ -133,9 +133,9 @@
 				    <ul class=single_grid>
 				    	<li class="grid1">
 				    	  <h3 class="m_13">Trainer</h3>
-				    	  <img src="images/s2.jpg" class="img-responsive" alt=""/>
-						  <h4>Lorem Ipsum<br><span class="m_text">Spinning</span></h4>
-						  <p>Lorem ipsum dolor sit amet, consectetuer.</p>
+				    	  <img src="images/trainer/mia.jpg" class="img-responsive" alt=""/>
+						  <h4>Mia Garcia<br><span class="m_text">Yoga</span></h4>
+						  <p>Fitness, Weight Loss, Nutrition</p>
 				    	</li>
 				    	<li class="grid2">
 				    	   <h3 class="m_13">Featured</h3>
@@ -197,9 +197,9 @@
 				    <ul class=single_grid>
 				    	<li class="grid1">
 				    	  <h3 class="m_13">Trainer</h3>
-				    	  <img src="images/s2.jpg" class="img-responsive" alt=""/>
-						  <h4>Lorem Ipsum<br><span class="m_text">Spinning</span></h4>
-						  <p>Lorem ipsum dolor sit amet, consectetuer.</p>
+				    	  <img src="images/trainer/james.jpg" class="img-responsive" alt=""/>
+						  <h4>James Smith<br><span class="m_text">Aerobics</span></h4>
+						  <p>Group fitness, Weight Loss, Flexibility</p>
 				    	</li>
 				    	<li class="grid2">
 				    	   <h3 class="m_13">Featured</h3>

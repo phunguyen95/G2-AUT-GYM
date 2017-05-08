@@ -1,13 +1,8 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+<?php session_start();?>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Free Gym Website Template | Contact :: w3layouts</title>
+<title>Gym Website Template</title>
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 <link href="css/style.css" rel='stylesheet' type='text/css' />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -24,42 +19,37 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 
 <body>
-    <!-- start header_bottom -->
-    <div class="header-bottom">
-		 <div class="container">
-			<div class="header-bottom_left">
-				<i class="phone"> </i><span>1-200-346-2986</span>
-			</div>
-			<div class="social">	
-			   <ul>	
-				  <li class="facebook"><a href="#"><span> </span></a></li>
-				  <li class="twitter"><a href="#"><span> </span></a></li>
-				  <li class="pinterest"><a href="#"><span> </span></a></li>	
-				  <li class="google"><a href="#"><span> </span></a></li>
-				  <li class="tumblr"><a href="#"><span> </span></a></li>
-				  <li class="instagram"><a href="#"><span> </span></a></li>	
-				  <li class="rss"><a href="#"><span> </span></a></li>							
-			   </ul>
-		   </div>
-		   <div class="clear"></div>
-		</div>
-    </div>
+   <?php require "social-media-row.php"; ?>
     <!-- start menu -->
     <div class="menu">
 	  <div class="container">
 		 <div class="logo">
-			<a href="index.html"><img src="images/logo.png" alt=""/></a>
+			<a href="index.php"><img src="images/logo.png" alt=""/></a>
 		 </div>
 		 <div class="h_menu4"><!-- start h_menu4 -->
 		   <a class="toggleMenu" href="#">Menu</a>
 			 <ul class="nav">
-			   <li><a href="index.html">Home</a></li>
-			   <li><a href="about.html">About</a></li>
-			   <li><a href="trainers.html">Trainers</a></li>
-			   <li><a href="classes.html">Classes</a></li>
-			   <li><a href="blog.html">Blog</a></li>
-			   <li><a href="pricing.html">Pricing</a></li>
-			   <li class="active"><a href="contact.html">Contact</a></li>
+			   <li><a href="index.php">Home</a></li>
+			   <li><a href="about.php">About</a></li>
+			   <li><a href="trainers.php">Trainers</a></li>
+			   <li><a href="classes.php">Classes</a></li>
+			   <li><a href="blog.php">Blog</a></li>
+			   <li><a href="pricing.php">Pricing</a></li>
+			   <li><a href="product.php">Shop</a></li>
+			   <li class="active"><a href="contact.php">Contact</a></li>
+			   <?php
+                if(isset($_SESSION["lname"])){
+                    echo '<li><a href="#">Hi '.$_SESSION["lname"].'</a>
+                             <ul>
+                                <li><a href="profile.php">View Profile</a></li>
+                                <li><a href="change_password.php">Change password</a></li>
+                                <li><a href="logout.php">Log-out</a></li>
+                             </ul>
+                          </li>';
+                }else{
+                    echo ' <li><a href="signin.php">Sign In</a></li>';
+                }
+            ?>
 			 </ul>
 			  <script type="text/javascript" src="js/nav.js"></script>
 		  </div><!-- end h_menu4 -->
@@ -74,29 +64,29 @@ License URL: http://creativecommons.org/licenses/by/3.0/
       	</div>
 
       	<?php 
-if(isset($_POST['submit'])){
-    $to = "phu.nguyen09995@gmail.com"; // this is your Email address
-    $from = $_POST['email']; // this is the sender's Email address
-    $first_name = $_POST['first_name'];
-    $subject = "Form submission";
-    $subject2 = "Copy of your form submission";
-    $message = $first_name . " wrote the following:" . "\n\n" . $_POST['message'];
-    $message2 = "Here is a copy of your message " . $first_name . "\n\n" . $_POST['message'];
+		if(isset($_POST['submit'])){
+		    $to = "phu.nguyen09995@gmail.com"; // this is your Email address
+		    $from = $_POST['email']; // this is the sender's Email address
+		    $first_name = $_POST['first_name'];
+		    $subject = "Form submission";
+		    $subject2 = "Copy of your form submission";
+		    $message = $first_name . " wrote the following:" . "\n\n" . $_POST['message'];
+		    $message2 = "Here is a copy of your message " . $first_name . "\n\n" . $_POST['message'];
 
-    $headers = "From:" . $from;
-    $headers2 = "From:" . $to;
-    mail($to,$subject,$message,$headers);
-    mail($from,$subject2,$message2,$headers2); // sends a copy of the message to the sender
-    echo "Mail Sent. Thank you " . $first_name . ", we will contact you shortly.";
-    // You can also use header('Location: thank_you.php'); to redirect to another page.
-    }
-?>
+		    $headers = "From:" . $from;
+		    $headers2 = "From:" . $to;
+		    mail($to,$subject,$message,$headers);
+		    mail($from,$subject2,$message2,$headers2); // sends a copy of the message to the sender
+		    echo "Mail Sent. Thank you " . $first_name . ", we will contact you shortly.";
+		    // You can also use header('Location: thank_you.php'); to redirect to another page.
+		    }
+		?>
       	<div class="border"> </div>
       	<div class="rwo contact">
       	  <div class="container">
       		 <div class="col-md-8 contact-top">
 			  <h3>Send us a message</h3>
-			  <p class="contact_msg">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy</p>
+			  <p class="contact_msg">Complete the form to send us a message!</p>
 			     <form method="post" action="">
 					<div class="to">
                      	<input type="text" name="first_name" class="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">
@@ -115,10 +105,10 @@ if(isset($_POST['submit'])){
              </div>
              <div class="col-md-4 contact-top_right">
 			  <h3>contact info</h3>
-			  <p>diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis.</p>
+			  <p>For any information, please contact directly from the centre or from phone number and email adress below.</p>
 			  <ul class="contact_info">
-			  	<li><i class="mobile"> </i><span>+1-900-235-2456</span></li>
-			  	<li><i class="message"> </i><span class="msg">info(at)gym.com</span></li>
+			  	<li><i class="mobile"> </i><span>021-085-22-697</span></li>
+			  	<li><i class="message"> </i><span class="msg">info@gym.com</span></li>
 			  </ul>
 	 		 </div>
       	  </div>
@@ -136,7 +126,7 @@ if(isset($_POST['submit'])){
 				 	<li><i class="calender"> </i><span class="contact_week">Friday</span><div class="hours1">h.6:00-h.24:00</div>  <div class="clear"></div></li>
 				 	<li><i class="calender"> </i><span class="contact_week">Saturday</span><div class="hours1">h.6:00-h.24:00</div>  <div class="clear"></div></li>
 				 	<li><i class="calender"> </i><span class="contact_week">Sunday</span><div class="hours1">h.6:00-h.24:00</div>  <div class="clear"></div></li>
-				    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod</p>
+				    <p>All classes are now available!</p>
 				 	<h4>Enjoy it!</h4>
 				 </ul>
 		       </div>
@@ -208,8 +198,9 @@ if(isset($_POST['submit'])){
        <div class="clear"></div>
      	<div class="contact_bottom">
      	  <ul class="join_text">
-	     	  <h3>Why Join ? <span class="m_26"> eleifend option congue nihil</span></h3>
-	     	  <p>lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.</p>
+	     	  <h3>Why Join ?
+	     	  <br> <span class="m_26">Nothing tastes as good as getting in shape feels</span></h3>
+	     	   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Work-out to get althy, prevent osteoporosis and improve muscle &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;strength, balance and flexibility. </p>	
 	      </ul>
      	  <ul class="btn_contact">
 			 <a href="#">Join Today</a>
@@ -219,151 +210,8 @@ if(isset($_POST['submit'])){
      <div class="clear"></div>
      </div>
      </div>
-     <div class="about_gallery">
-		 	<div class="container">
-		 	  <div class="col-md-8">
-		     	 <h3 class="m_2">Gallery</h3>
-		     	 <div id="ca-container" class="ca-container">
-				    <div class="ca-wrapper">
-				         <div class="ca-item ca-item-1">
-						   <div class="ca-item-main">
-								<div class="ca-icon"> </div>
-								<div class="ca-icon1"> </div>
-							</div>
-						  </div>
-						<div class="ca-item ca-item-2">
-							<div class="ca-item-main">
-								<div class="ca-icon"> </div>
-								<div class="ca-icon2"> </div>
-							</div>
-						</div>
-						<div class="ca-item ca-item-3">
-							<div class="ca-item-main">
-								<div class="ca-icon"> </div>
-								<div class="ca-icon3"> </div>
-							</div>
-						</div>
-						<div class="ca-item ca-item-4">
-							<div class="ca-item-main">
-								<div class="ca-icon"> </div>
-								<div class="ca-icon4"> </div>
-						     </div>
-						</div>
-						<div class="ca-item ca-item-5">
-							<div class="ca-item-main">
-								<div class="ca-icon"> </div>
-								<div class="ca-icon5"> </div>
-							</div>
-						</div>
-						<div class="ca-item ca-item-6">
-							<div class="ca-item-main">
-								<div class="ca-icon"> </div>
-								<div class="ca-icon6"> </div>
-							</div>
-						</div>
-						<div class="ca-item ca-item-7">
-							<div class="ca-item-main">
-								<div class="ca-icon"> </div>
-								<div class="ca-icon7"> </div>
-							</div>
-						</div>
-						<div class="ca-item ca-item-8">
-							<div class="ca-item-main">
-								<div class="ca-icon"> </div>
-								<div class="ca-icon"> </div>
-							</div>
-						</div>
-			    </div>
-			 </div>
-				    <script type="text/javascript">
-						$('#ca-container').contentcarousel();
-					</script>
-		   </div>
-		   <div class="col-md-4">
-		   	 <h3 class="m_2">Partner</h3>
-			  <ul class="partner">
-			  	<li><img src="images/p6.png" alt=""/></li>
-			  	<li><img src="images/p5.png" alt=""/></li>
-			  	<li><img src="images/p4.png" alt=""/></li>
-			  	<li><img src="images/p3.png" alt=""/></li>
-			  	<li><img src="images/p2.png" alt=""/></li>
-			  	<li><img src="images/p1.png" alt=""/></li>
-			  	 <div class="clear"></div>
-			  </ul>
-		    </div>
-	       <div class="clear"></div>
-	       </div>
-		  </div>
+     <?php require "gallery-partner-col.php";?>
     </div>
-     <div class="footer-top">
-		 	<ul class="twitter_footer">
-		 	 <li>
-		 	   <i class="twt_icon"> </i><p>aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel  <span class="m_6">2 days ago</span></p>
-		 	   <div class="clear"></div>
-		 	 </li>
-		 	</ul>
-		 </div>
-		 <div class="footer-bottom">
-		   <div class="container">
-		 	 <div class="row section group">
-				<div class="col-md-4">
-				   <h4 class="m_7">Newsletter Signup</h4>
-				   <p class="m_8">Lorem ipsum dolor sit amet, consectetuer adipiscing elit sed diam nonummy.</p>
-				      <form class="subscribe">
-			             <input type="text" value="Insert Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Insert Email';}">
-					  </form>
-			          <div class="subscribe1">
-			            <a href="#">Submit Email<i class="but_arrow"> </i></a>
-			          </div>
-				</div>
-				<div class="col-md-4">
-					<div class="f-logo">
-						<img src="images/logo.png" alt=""/>
-					</div>
-					<p class="m_9">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis</p>
-					<p class="address">Phone : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="m_10">(00) 222 666 444</span></p>
-					<p class="address">Email : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="m_10">info[at]mycompany.com</span></p>
-				</div>
-				<div class="col-md-4">
-					<ul class="list">
-						<h4 class="m_7">Menu</h4>
-						<li><a href="#">About</a></li>
-						<li><a href="#">Trainers</a></li>
-						<li><a href="#">Classes</a></li>
-						<li><a href="#">Pricing</a></li>
-						<li><a href="#">Privacy</a></li>
-						<li><a href="#">Contact</a></li>
-					</ul>
-					<ul class="list1">
-						<h4 class="m_7">Community</h4>
-						<li><a href="#">Blog</a></li>
-						<li><a href="#">Forum</a></li>
-						<li><a href="#">Support</a></li>
-						<li><a href="#">Newsletter</a></li>
-					</ul>
-				</div>
-				<div class="clear"></div>
-	  		  </div>
-		 	</div>
-		 </div>
-		 <div class="copyright">
-		  <div class="container">
-		    <div class="copy">
-		        <p>© 2014 Template by <a href="http://w3layouts.com" target="_blank"> w3layouts</a></p>
-		    </div>
-		    <div class="social">	
-			   <ul>	
-				  <li class="facebook"><a href="#"><span> </span></a></li>
-				  <li class="twitter"><a href="#"><span> </span></a></li>
-				  <li class="pinterest"><a href="#"><span> </span></a></li>	
-				  <li class="google"><a href="#"><span> </span></a></li>
-				  <li class="tumblr"><a href="#"><span> </span></a></li>
-				  <li class="instagram"><a href="#"><span> </span></a></li>	
-				  <li class="rss"><a href="#"><span> </span></a></li>							
-			   </ul>
-		    </div>
-		   <div class="clear"></div>
-		  </div>
-	     </div>
+   <?php require "footer.php";?>
 </body>
 </html>

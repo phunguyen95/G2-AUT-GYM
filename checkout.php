@@ -53,19 +53,21 @@
             <li><a href="classes.php">Classes</a></li>
             <li><a href="blog.php">Blog</a></li>
             <li><a href="pricing.php">Pricing</a></li>
-            <li class="active"><a href="product.php">Products</a>
-                <ul>
-                    <li><a href="shopping-cart.php">Shopping Cart</a></li>
-                </ul>
+            <li class="active"><a href="product.php">Shop</a>
             </li>
             <li><a href="contact.php">Contact</a></li>
             <?php
-                if(isset($_SESSION["lname"])){
-                    echo '<li><a href="logout.php">Log Out</a></li>';
-                }else{
-                    echo ' <li><a href="signin.php">Sign In</a></li>';
-                }
-            ?>
+            if(isset($_SESSION["lname"])){
+          echo '<li><a href="#">Hi '.$_SESSION["lname"].'</a>
+               <ul>
+                <li><a href="change_password.php">Change password</a></li>
+                <li><a href="logout.php">Log-out</a></li>
+               </ul>
+              </li>';
+          }else{
+          echo ' <li><a href="signin.php">Sign In</a></li>';
+        }
+      ?>
         </ul>
         <script type="text/javascript" src="js/nav.js"></script>
       </div><!-- end h_menu4 -->
@@ -103,7 +105,7 @@
                   <label for="PaymentAmount">Payment amount</label>
                   <div class="amount-placeholder">
                       <span>$</span>
-                      <span>500.00</span>
+                      
                   </div>
               </div>
               <div class="form-group">
@@ -138,7 +140,7 @@
               </div>
               <button id="PayButton" name="PayButton" class="btn btn-block btn-success submit-button" type="submit">
                   <span class="submit-button-lock"></span>
-                  <span class="align-middle">Pay $500.00</span>
+                  <span class="align-middle">Pay Now</span>
               </button>
               <button id="CancelButton" name="CancelButton" class="btn btn-block btn-success submit-button" type="submit">
                   <span class="align-middle">Cancel order</span>

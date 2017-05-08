@@ -4,7 +4,7 @@
 	  <div class="join">
 	  	 <h3>Why Join ?</h3>
 	  	 <h4>Nothing tastes as good as getting in shape feels</h4>
-	  	 <p>Work-out to get healthy, prevent osteoporosis and improve muscle strength, balance and flexibility. </p>	
+	  	 <p>Work-out to get althy, prevent osteoporosis and improve muscle strength, balance and flexibility. </p>	
 	  	 <div class="btn3">
 	       <a href="#">Join Today</a>
          </div>	

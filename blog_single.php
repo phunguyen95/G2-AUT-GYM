@@ -34,8 +34,22 @@
 			   <li><a href="classes.php">Classes</a></li>
 			   <li class="active"><a href="blog.php">Blog</a></li>
 			   <li><a href="pricing.php">Pricing</a></li>
-			   <li><a href="product.php">Product</a></li>
+			   <li><a href="product.php">Shop</a> </li>
 			   <li><a href="contact.php">Contact</a></li>
+			    <?php
+                if(isset($_SESSION["lname"])){
+                    echo '<li><a href="#">Hi '.$_SESSION["lname"].'</a>
+                             <ul>
+                                <li><a href="profile.php">View Profile</a></li>
+                                <li><a href="change_password.php">Change password</a></li>
+                                <li><a href="logout.php">Log-out</a></li>
+                             </ul>
+                          </li>';
+                }else{
+                    echo ' <li><a href="signin.php">Sign In</a></li>';
+                }
+            ?>
+			?>
 			 </ul>
 			  <script type="text/javascript" src="js/nav.js"></script>
 		  </div><!-- end h_menu4 -->
@@ -52,72 +66,103 @@
       	<div class="container">
 		  <div id="#1" class="row single-top">
 		  	   <div class="col-md-8">
-		  	     <div class="blog_single_grid">
-				  <ul class="links_blog">
-				  	<h3><a href="blog_single.html">15 years of health and fitness</a></h3>
-		  			<li><a href="#"><i class="blog_icon5"> </i><span>April 14, 2016</span></a> <div class="clear"></div></li>
-		  			<li><a href="#"><i class="blog_icon6"> </i><span>admin</span></a><div class="clear"></div></li>
-		  			<li><a href="#"><i class="blog_icon7"> </i><span>80</span></a><div class="clear"></div></li>
-		  			<li><a href="#"><i class="blog_icon8"> </i><span>2</span></a><div class="clear"></div></li>
-		  		  </ul>
-				  <img src="images/blog-news-1.jpg" class="img-responsive" alt=""/>
-				  <div class="blog_single_desc">
-				    <p class="m_16">Richard and Judy Fleming remember, like it was yesterday, the day they signed up to join Millennium Institute of Sport and Health. On their way to Taupō for a family holiday they decided to divert their journey for a swim and to inspect the new facility they had heard so much about. And that was it, they were sold. On 16th December 2001, Richard and Judy Fleming became ‘Original Gym Members’.</p>
-				    <p class="m_17">Like most ‘Originals’ they signed their membership contracts in a temporary building situated at the entrance to the athletics track. With construction still underway, Richard recalls how the couple did not quite manage a swim that day. “We dropped in for a swim but found contractors smoothing concrete on the bottom of an empty pool. Subsequent visits to the pool made up for that day.”</p>
-				    <p class="m_16">You will find them chatting to members, staff and athletes. Always with a smile and a clear drive to be the best they can be. “It’s been a long and enjoyable journey and one which we look forward to continuing into the future. Thank you.”</p>
-				  </div>
-				  <ul class="social_blog">	
-				   	<h3>Share</h3>
-					 <li class="fb"><a href="#"><span> </span></a></li>
-					 <li class="tw"><a href="#"><span> </span></a></li>
-					 <li class="google_blog"><a href="#"><span> </span></a></li>
-					 <li class="linkedin"><a href="#"><span> </span></a></li>	
-					 <div class="clear"></div>
-				 </ul>
-				 <ul class="comments">
-				 	<h4>2 Comments</h4>
-			        
-			        <li>
-			        	<ul class="comment_head">
-			        		<h5>admin&nbsp;&nbsp;&nbsp; <span class="m_21"><a href="#">26 April 2016, 15:20</a></span></h5> <div class="reply1"><i class="reply"> </i><span class="m_22"><a href="">Reply</a></span></div><div class="clear"></div>
-			        	</ul>
-			            <i class="preview"> </i>
-			            <div class="data">
-			               <p>It's great!</p>
-			            </div>
-			            <div class="clear"></div>
-			        </li>
+		  	     	<div class="blog_single_grid">
+		  	     	<?php
+						require_once ('conf/setting.php');
+					    $conn = mysqli_connect($servername, $username, $password, $dbname);
+					    // Check connection
+					    if (!$conn) {
+					        die("Connection failed: " . mysqli_connect_error());
+					    }    
 
-			        <ul class="comment_head">
-			        		<h5>author&nbsp;&nbsp;&nbsp; <span class="m_21"><a href="#">28 April 2016, 18:07</a></span></h5> <div class="reply1"><i class="reply"> </i><span class="m_22"><a href="">Reply</a></span></div><div class="clear"></div>
-			        </ul>
-			     	<li class="middle">
-			          <i class="preview"> </i>
-			            <div class="data-middle"> 
-			                <p>Thank you so much.</p>
-			            </div>
-			            <div class="clear"></div>
-			        </li>
+					  	$sql = "SELECT * FROM blog";
+					    $result = mysqli_query($conn, $sql);
 
-	
-	  			 	<h4>Leave a comment</h4>
-	  			  	<form id="commentform">
-					     <p class="comment-form-author">
-							<input id="author" name="author" type="text" value="" size="30" aria-required="true" placeholder="Name">
-						 </p>
-						 <p class="comment-form-email">
-							<input id="email" name="email" type="text" value="" size="30" aria-required="true" placeholder="Email">
-						 </p>
-						 <p class="comment-form-comment">
-							<textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" placeholder="Comment"></textarea>
-						 </p>
-						 <p class="form-submit">
-				           <input name="submit" type="submit" id="submit" value="Send">
-						 </p>
-						 <div class="clear"></div>
-				   	</form>
+					    while($row = mysqli_fetch_assoc($result)){
+					    	?>
+							  <ul class="links_blog">
+							  	<h3><a href="#"><?php echo $row['title'];?></a></h3>
+					  			<li><a href="#"><i class="blog_icon5"> </i><span>
+					  				<?php 
+				  						$date = date_create($row["date"]);		
+				  						echo date_format($date,"F j, Y");
+				  					?>	
+						  			</span></a> <div class="clear"></div></li>
+						  			<li><a href="#"><i class="blog_icon6"> </i><span><?php echo $row["author"];?></span></a><div class="clear"></div></li>
+						  			<li><a href="#"><i class="blog_icon7"> </i><span><?php echo $row["react"];?></span></a><div class="clear"></div></li>
+						  			<li><a href="#"><i class="blog_icon8"> </i><span><?php echo $row["cmt_num"];?></span></a><div class="clear"></div></li>
+						  		  </ul>
+								  <?php echo '<img src="'.$row['img'].'" class="img-responsive" alt=""/>';?>
+								  <div class="blog_single_desc">
+								    <?php echo $row["description"];?>
+								  </div>
+								  <ul class="social_blog">	
+								   	<h3>Share</h3>
+									 <li class="fb"><a href="#"><span> </span></a></li>
+									 <li class="tw"><a href="#"><span> </span></a></li>
+									 <li class="google_blog"><a href="#"><span> </span></a></li>
+									 <li class="linkedin"><a href="#"><span> </span></a></li>	
+									 <div class="clear"></div>
+								 </ul>
+								 <ul class="comments">
+								 	<h4><?php echo $row["cmt_num"];
+								 		if($row["cmt_num"] > 1){
+								 			echo " Comments";
+								 		}else{
+								 			echo " Comment";
+								 		}	
+								 	?></h4>
 
-				  </ul>
+								 	<?php
+								 		$v = $row['blog_id'];
+								 		$sql2 = "SELECT * FROM comment where blog_id='$v'";
+									    $result2 = mysqli_query($conn, $sql2);
+
+									    while($row2 = mysqli_fetch_assoc($result2)){
+									    	?>
+									    		<li>
+										        	<ul class="comment_head">
+										        		<h5><?php echo $row2['username'];?>&nbsp;&nbsp;&nbsp; <span class="m_21"><a href="#">
+										        			<?php 
+										  						$date2 = date_create($row2["date"]);		
+										  						echo date_format($date2,"F j, Y");
+										  					?>	
+										        		</a></span></h5> <div class="reply1"><i class="reply"> </i><span class="m_22"><a href="">Reply</a></span></div><div class="clear"></div>
+										        	</ul>
+										            <i class="preview"> </i>
+										            <div class="data">
+										               <p><?php echo $row2["comment"];?></p>
+										            </div>
+										            <div class="clear"></div>
+										        </li>
+									    	<?php	
+									    }
+								 	?>
+							        
+				
+				  			 	<h4>Leave a comment</h4>
+				  			  	<form id="commentform">
+								     <p class="comment-form-author">
+										<input id="author" name="author" type="text" value="" size="30" aria-required="true" placeholder="Name">
+									 </p>
+									 <p class="comment-form-email">
+										<input id="email" name="email" type="text" value="" size="30" aria-required="true" placeholder="Email">
+									 </p>
+									 <p class="comment-form-comment">
+										<textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" placeholder="Comment"></textarea>
+									 </p>
+									 <p class="form-submit">
+							           <input name="submit" type="submit" id="submit" value="Send">
+									 </p>
+									 <div class="clear"></div>
+							   	</form>
+							  </ul>
+					    	<?php
+
+					    }
+					    mysqli_close($conn);
+					?>
+
 			    </div>
 			   </div>
 			   <div class="col-md-4">
@@ -155,9 +200,8 @@
 				    <a href="#">More</a>
 			       </div>
 				 </div>
-				  <ul  class="blog-list1">
-					 <h4>Tags</h4>
-						<li><a href="#">Web Design</a></li>
+				    <ul  class="blog-list1">
+					    <h4>Tags</h4>
 						<li><a href="#">Personal Trainner</a></li>
 						<li><a href="#">Gyms</a></li>
 						<li><a href="#">Fitness</a></li>
@@ -167,7 +211,7 @@
 						<li><a href="#">pilates</a></li>
 						<li><a href="#">Yoga</a></li>
 						<div class="clear"></div>
-					</ul>
+				    </ul>
 
 		   	     </div>
 				<div class="clear"></div>

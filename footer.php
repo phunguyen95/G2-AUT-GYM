@@ -17,7 +17,7 @@
 			</div>
 			<p class="m_9">We are committed to addressing national, regional and local needs in sport, physical activity and community health and fitness</p>
 			<p class="address">Phone : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="m_10">(021) 085 22 697</span></p>
-			<p class="address">Email : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="m_10">info@gymaut.com</span></p>
+			<p class="address">Email : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="m_10">info@gym.com</span></p>
 		</div>
 		<div class="col-md-4">
 			<ul class="list">

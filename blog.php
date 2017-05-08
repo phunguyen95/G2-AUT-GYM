@@ -1,4 +1,4 @@
-
+<?php session_start();?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -33,8 +33,22 @@
 			   <li><a href="classes.php">Classes</a></li>
 			   <li class="active"><a href="blog.php">Blog</a></li>
 			   <li><a href="pricing.php">Pricing</a></li>
-			   <li><a href="product.php">Product</a></li>
+			   <li><a href="product.php">Shop</a></li>
 			   <li><a href="contact.php">Contact</a></li>
+			  <?php
+                if(isset($_SESSION["lname"])){
+                    echo '<li><a href="#">Hi '.$_SESSION["lname"].'</a>
+                             <ul>
+                                <li><a href="profile.php">View Profile</a></li>
+                                <li><a href="change_password.php">Change password</a></li>
+                                <li><a href="logout.php">Log-out</a></li>
+                             </ul>
+                          </li>';
+                }else{
+                    echo ' <li><a href="signin.php">Sign In</a></li>';
+                }
+            ?>
+			
 			 </ul>
 			  <script type="text/javascript" src="js/nav.js"></script>
 		  </div><!-- end h_menu4 -->
@@ -51,69 +65,54 @@
       	<div class="container">
       		<div class="row single-top">
 		  	   <div class="col-md-8">
-		  	   	<div class="blog_box">
-				 <div class="blog_grid">
-				  <h3><a href="blog_single.php">15 years of health and fitness</a></h3><i class="document"> </i>
-				  <a href="blog_single.php"><img src="images/blog-news-1.jpg" class="img-responsive" alt=""/></a>
-				  <div class="singe_desc">
-				    <p>Richard and Judy Fleming remember, like it was yesterday, the day they signed up to join Millennium Institute of Sport and Health. On their way to Taupō for a family holiday they decided to divert their journey for a swim and to inspect the new facility they had heard so much about.</p>
-				     <div class="comments">
-		  				<ul class="links">
-		  					<li><a href="#"><i class="blog_icon1"> </i><br><span>April 14, 2016</span></a></li>
-		  					<li><a href="#"><i class="blog_icon2"> </i><br><span>admin</span></a></li>
-		  					<li><a href="#"><i class="blog_icon3"> </i><br><span>80</span></a></li>
-		  					<li><a href="#"><i class="blog_icon4"> </i><br><span>2</span></a></li>
-		  				</ul>
-		  				<div class="btn_blog"><a href="blog_single.php#1">Read More</a>
-			            </div>
-		  		        <div class="clear"></div>
-		  		     </div>
-				  </div>
-				 </div>
-				</div>
-				<div class="blog_box">
-				 <div class="blog_grid">
-				  <h3><a href="blog_single.php">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet. </a></h3><i class="document1"> </i>
-				  <a href="blog_single.php"><img src="images/blog_img2.jpg" class="img-responsive" alt=""/></a>
-				  <div class="singe_desc">
-				    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem </p>
-				     <div class="comments">
-		  				<ul class="links">
-		  					<li><a href="#"><i class="blog_icon1"> </i><br><span>April 14, 2014</span></a></li>
-		  					<li><a href="#"><i class="blog_icon2"> </i><br><span>admin</span></a></li>
-		  					<li><a href="#"><i class="blog_icon3"> </i><br><span>1206</span></a></li>
-		  					<li><a href="#"><i class="blog_icon4"> </i><br><span>1206</span></a></li>
-		  				</ul>
-		  				<div class="btn_blog"><a href="#">Read More</a>
-			            </div>
-		  		        <div class="clear"></div>
-		  		     </div>
-				  </div>
-				 </div>
-				</div>
-				<div class="blog_box">
-				 <div class="blog_grid">
-				  <h3><a href="blog_single.php">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet. </a></h3><i class="document2"> </i>
-				  <div class="video_player">
-					 <iframe src="//player.vimeo.com/video/68395270?title=0&amp;byline=0&amp;portrait=0&amp;color=ff9933" width="100%" height="350" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>  
-		          </div>
-				  <div class="singe_desc">
-				    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip</p>
-				     <div class="comments">
-		  				<ul class="links">
-		  					<li><a href="#"><i class="blog_icon1"> </i><br><span>April 14, 2014</span></a></li>
-		  					<li><a href="#"><i class="blog_icon2"> </i><br><span>admin</span></a></li>
-		  					<li><a href="#"><i class="blog_icon3"> </i><br><span>1206</span></a></li>
-		  					<li><a href="#"><i class="blog_icon4"> </i><br><span>1206</span></a></li>
-		  				</ul>
-		  				<div class="btn_blog"><a href="#">Read More</a>
-			            </div>
-		  		        <div class="clear"></div>
-		  		     </div>
-				  </div>
-				 </div>
-				</div>
-			
+		  	    <?php
+					require_once ('conf/setting.php');
+				    $conn = mysqli_connect($servername, $username, $password, $dbname);
+				    // Check connection
+				    if (!$conn) {
+				        die("Connection failed: " . mysqli_connect_error());
+				    }    
+
+				    $sql = "SELECT * FROM blog";
+				    $result = mysqli_query($conn, $sql);
+
+				    while($row = mysqli_fetch_assoc($result)){
+				    	?>
+							<div class="blog_box">
+							 	<div class="blog_grid">
+							  		<h3><a href="blog_single.php"><?php echo $row['title'];?></a></h3>
+							  			<a href="blog_single.php"><?php echo '<img src="'.$row["img"].'" class="img-responsive" alt=""/>';?></a>
+							  <div class="singe_desc">
+							    <p>
+							    	<?php $sub = substr($row["description"], 0, 255);
+							    		  echo $sub."... .";
+							    	?>
+							    </p>
+							     <div class="comments">
+					  				<ul class="links">
+					  					<li><a href="#"><i class="blog_icon1"> </i><br><span>
+					  					<?php 
+					  						$date = date_create($row["date"]);		
+					  						echo date_format($date,"F j, Y");
+					  					?>	
+					  					</span></a></li>
+					  					<li><a href="#"><i class="blog_icon2"> </i><br><span><?php echo $row["author"];?></span></a></li>
+					  					<li><a href="#"><i class="blog_icon3"> </i><br><span><?php echo $row["react"];?></span></a></li>
+					  					<li><?php echo '<a href="'.$row["blog_id"].'">';?><i class="blog_icon4"> </i><br><span><?php echo $row["cmt_num"];?></span></a></li>
+					  					
+					  				</ul>
+					  				<div class="btn_blog"><?php echo '<a href="blog_single.php">Read More</a>';?>
+						            </div>
+					  		        <div class="clear"></div>
+					  		     </div>
+							  </div>
+							 </div>
+							</div>
+				    	<?php
+
+				    }
+				    mysqli_close($conn);
+				?>
 
 				<ul class="dc_pagination dc_paginationA dc_paginationA06">
 				  <li><a href="#" class="current">Prev</a></li>
@@ -127,7 +126,7 @@
 				  <li><a href="#">20</a></li>
 				  <li><a href="#" class="current">Next</a></li>
 		       </ul>
-			   </div>
+			</div>
 
 
 			   <div class="col-md-4 ">

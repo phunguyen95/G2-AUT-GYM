@@ -6,48 +6,7 @@
 	<title></title>
 	<link rel="stylesheet" href="">
 	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-<style>
-.regbutton{    
-    height: 50px;
-    width: 200px;
-    background-color:tomato;
-    border-radius: 0px;
-    font-size: 18px;
-    color:white;
-    border: none !important;
-    margin-bottom: 5px;
-}
-.regbutton:hover{    
-    color: white;
-    background-color:#aa422f;
-}
-.regbutton:active{    
-    color: white;
-    background-color:#aa422f;
-}
-.logbutton{    
-    height: 50px;
-    width: 200px;
-    background-color:yellowgreen;
-    border-radius: 0px;
-    font-size: 18px;
-    color:white;
-    border: none !important;
-    margin-bottom: 5px;
-}
-.logbutton:hover{    
-    color: white;
-    background-color:darkolivegreen;
-}
-.logbutton:active{    
-    color: white;
-    background-color:darkolivegreen;
-}
 
-
-</style>
-    
-</style>
 </head>
 <body>
 <div class="container">
@@ -59,8 +18,8 @@
                 <p class="form-title">
                     Sign In</p>
                 <form method="post" action="login.php" class="login">
-                <input type="text" placeholder="Username" name="username" required />
-                <input type="password" placeholder="Password" name="password" required />
+                <input type="text" placeholder="Username" name="username" />
+                <input type="password" placeholder="Password" name="password" />
                 <input type="submit" value="Sign In" class="btn btn-success btn-sm" />
                 <div class="remember-forgot">
                     <div class="row">
@@ -72,13 +31,10 @@
                                 </label>
                             </div>
                         </div>
-
                         <div class="col-md-6 forgot-pass-content">
                             <a href="javascription:void(0)" class="forgot-pass">Forgot Password</a>
                         </div>
                     </div>
-                               <button type="submit" id="button"  style="margin-left: 5%" class="btn btn-default regbutton"><a href="signup.html">Register </a></button>
-
                 </div>
                 </form>
             </div>

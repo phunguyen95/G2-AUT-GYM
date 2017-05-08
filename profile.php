@@ -50,7 +50,7 @@
 		    <li><a href="pricing.php">Pricing</a></li>
             <li class="active"><a href="product.php">Shop</a></li>
 		    <li><a href="contact.php">Contact</a></li>
-		  <?php
+		   <?php
                 if(isset($_SESSION["lname"])){
                     echo '<li><a href="#">Hi '.$_SESSION["lname"].'</a>
                              <ul>
@@ -76,39 +76,27 @@
 <div class="main">
     <div class=""><img src="images/100.jpg" class="img-responsive" alt=""/></div>
     <div class="about_banner_wrap">
-	    <h1 class="m_11">Products</h1>
+	    <h1 class="m_11">YOUR PROFILE</h1>
     </div>
   	<div class="container">
     <div style="height: 70px">&nbsp;</div>
         <div class="row">     
             <?php
-                $sql = "SELECT * FROM products";
+            $id = $_SESSION['mem_id'];
+                $sql = "SELECT * FROM membership where mem_id = '$id'";
                 $result = mysqli_query($conn, $sql);
 
                 if (mysqli_num_rows($result) > 0) {
+                 
                     while($row = mysqli_fetch_assoc($result)) {     
-                       echo '<div class="col-sm-4">
-                                <div class="col-item">
-                                    <div class="photo"><img src="'.$row["img"].'" class="img-responsive" alt="a" /></div>
-                                         <div class="info">
-                                            <div class="row" style="width:372px">
-                                                <div class="price col-md-6"><h5>'.$row["id"].'<br>'.$row["name"].'</h5><h5 class="price-text-color">NZD $'.$row["price"].'</h5></div>
-                                                <div class="rating hidden-sm col-md-6">
-                                                    <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                                    </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                                    </i><i class="fa fa-star"></i>
-                                                </div>
-                                            </div>
-                                            <div class="separator clear-left">
-                                                <p class="btn-add">
-                                                    <i class="fa fa-shopping-cart"></i><a href="more_detail.php?p='.$row["id"].'" class="hidden-sm">Add to cart</a></p>
-                                                <p class="btn-details">
-                                                    <i class="fa fa-list"></i><a href="more_detail.php?p='.$row["id"].'" class="hidden-sm">More details</a></p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                </div>';          
+                       echo ' <div><br>
+                               <p>Membership ID: '.$row["mem_id"].'</p>
+                               <p>Username: '.$row["username"].'</p>
+                               <p>Fullname: '.$row["fname"].' '.$row["lname"].'</p>
+                               <p>Address: '.$row["address"].'</p>
+                               <p>Contact: '.$row["contact"].'</p>
+                               <p>Password: '.$row["password"].'</p>
+                              </div> ';          
                              
                     }
                 } else {
