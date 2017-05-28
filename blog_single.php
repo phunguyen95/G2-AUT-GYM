@@ -1,4 +1,4 @@
-
+<?php session_start();?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -41,7 +41,6 @@
                     echo '<li><a href="#">Hi '.$_SESSION["lname"].'</a>
                              <ul>
                                 <li><a href="profile.php">View Profile</a></li>
-                                <li><a href="change_password.php">Change password</a></li>
                                 <li><a href="logout.php">Log-out</a></li>
                              </ul>
                           </li>';
@@ -68,17 +67,11 @@
 		  	   <div class="col-md-8">
 		  	     	<div class="blog_single_grid">
 		  	     	<?php
-						require_once ('conf/setting.php');
-					    $conn = mysqli_connect($servername, $username, $password, $dbname);
-					    // Check connection
-					    if (!$conn) {
-					        die("Connection failed: " . mysqli_connect_error());
-					    }    
-
+						require_once ('config.php');
+					    
 					  	$sql = "SELECT * FROM blog";
-					    $result = mysqli_query($conn, $sql);
-
-					    while($row = mysqli_fetch_assoc($result)){
+					    
+					    foreach ($dbo->query($sql) as $row) {
 					    	?>
 							  <ul class="links_blog">
 							  	<h3><a href="#"><?php echo $row['title'];?></a></h3>
@@ -160,7 +153,7 @@
 					    	<?php
 
 					    }
-					    mysqli_close($conn);
+					    
 					?>
 
 			    </div>

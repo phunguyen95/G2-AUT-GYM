@@ -1,34 +1,8 @@
 <?php
 session_start();
-// include database configuration file
-$db = new mysqli("localhost", "root", "", "gym");
-
-if ($db->connect_error) {
-    die("Unable to connect database: " . $db->connect_error);
-}
-
-
 // initializ shopping cart class
 include 'Cart.php';
 $cart = new Cart;
-
-// redirect to home if cart is empty
-if($cart->total_items() <= 0){
-    header("Location: product.php");
-}
-
-if(isset($_SESSION["mem_id"])){
-   $_SESSION['sessCustomerID'] = $_SESSION['mem_id'];
-}else{
-   header("Location: signin.php");
-}
-
-// set customer ID in session
-
-
-// get customer details by session customer ID
-$query = $db->query("SELECT * FROM membership WHERE mem_id = ".$_SESSION['sessCustomerID']);
-$custRow = $query->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,17 +22,22 @@ $custRow = $query->fetch_assoc();
     <!-- //grid-slider -->
     <!---calender-style-->
     <link rel="stylesheet" href="css/jquery-ui.css" />
-    <meta charset="utf-8">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style>
     
-    .table{width: 65%;float: left;}
-    .shipAddr{width: 30%;float: left;margin-left: 30px;}
-    .footBtn{width: 95%;float: left;}
-    .orderBtn {float: right;}
-    </style>
+    <script>
+    function updateCartItem(obj,id){
+        $.get("cartAction.php", {action:"updateCartItem", id:id, qty:obj.value}, function(data){
+            if(data == 'ok'){
+                location.reload();
+            }else{
+                alert('Cart update failed, please try again.');
+            }
+        });
+    }
+    </script>
+</head>
 </head>
 <body>
 <?php require "social-media-row.php"; ?>
@@ -100,9 +79,11 @@ $custRow = $query->fetch_assoc();
   </div>
 </div>
 <!-- end menu -->
+
 <div class="main">
 <div class="container">
-    <h1>Order Preview</h1>
+
+    <h1>Shopping Cart</h1><br>
     <table class="table">
     <thead>
         <tr>
@@ -110,6 +91,7 @@ $custRow = $query->fetch_assoc();
             <th>Price</th>
             <th>Quantity</th>
             <th>Subtotal</th>
+            <th>&nbsp;</th>
         </tr>
     </thead>
     <tbody>
@@ -117,37 +99,37 @@ $custRow = $query->fetch_assoc();
         if($cart->total_items() > 0){
             //get cart items from session
             $cartItems = $cart->contents();
+            $_SESSION['all'] = 0;
             foreach($cartItems as $item){
+                $_SESSION['all'] += $item["qty"];
         ?>
         <tr>
             <td><?php echo $item["name"]; ?></td>
             <td><?php echo 'NZD $'.$item["price"].''; ?></td>
-            <td><?php echo $item["qty"]; ?></td>
+            <td><input type="number" class="form-control text-center" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')"></td>
             <td><?php echo 'NZD $'.$item["subtotal"].''; ?></td>
+            <td>
+                <a href="cartAction.php?action=removeCartItem&id=<?php echo $item["rowid"]; ?>" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="glyphicon glyphicon-trash"></i></a>
+            </td>
         </tr>
         <?php } }else{ ?>
-        <tr><td colspan="4"><p>No items in your cart......</p></td>
+        <tr><td colspan="5"><p>Your cart is empty.....</p></td>
         <?php } ?>
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="3"></td>
+            <td><a href="product.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</a></td>
+            <td colspan="2"></td>
             <?php if($cart->total_items() > 0){ ?>
             <td class="text-center"><strong>Total <?php echo 'NZD $'.$cart->total().''; ?></strong></td>
+            <td><a href="checkout.php" class="btn btn-success btn-block">Checkout <i class="glyphicon glyphicon-menu-right"></i></a></td>
             <?php } ?>
+        </tr>
+        <tr>
+            <td><a href="empty_cart.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Empty Your Bag &nbsp;&nbsp;&nbsp;&nbsp;</a></td>
         </tr>
     </tfoot>
     </table>
-    <div class="shipAddr">
-        <h4>Shipping Details</h4>
-        <p><b>Fullname:</b> <?php echo $custRow['fname']." ". $custRow['lname']; ?></p>
-        <p><b>Contact:</b> <?php echo $custRow['contact']; ?></p>
-        <p><b>Address:</b> <?php echo $custRow['address']; ?></p>
-    </div>
-    <div class="footBtn">
-        <a href="product.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</a>
-        <a href="cartAction.php?action=placeOrder" class="btn btn-success orderBtn">Place Order <i class="glyphicon glyphicon-menu-right"></i></a>
-    </div>
 </div>
 <div style="height: 70px;">&nbsp;</div>
 <?php require "footer.php"; ?>
