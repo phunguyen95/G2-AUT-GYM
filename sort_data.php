@@ -1,6 +1,12 @@
 <?php
     session_start();
-    require_once ('config.php');   
+    require_once ('conf/setting.php');
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+    // Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
 
     if(empty($_GET['key']) || $_GET['key'] == ""){
         require "all_products.php";
@@ -8,12 +14,11 @@
         $key = $_GET['key'];
 
         $sql = "SELECT * FROM products ORDER BY ".$key." DESC";
-        $find = $dbo->prepare($sql);
-        $find->execute();
-        $count = $find->rowCount();
 
-        if($count > 0){
-            foreach ($dbo->query($sql) as $row) {  
+        $result = mysqli_query($conn, $sql);
+        
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
                 ?> 
                 <div class="col-sm-4">
                     <div class="col-item">
@@ -23,6 +28,7 @@
                                     <div class="price col-md-6">
                                         <?php echo '
                                             <h5 id="'.$row["id"].'_name">'.$row["name"].'</h5>
+                                            <h5>Color: '.$row["colour"].'</h5>
                                             <h5 id="'.$row["id"].'_price" class="price-text-color">NZD $'.$row["price"].'</h5>'
 
                                         ?>

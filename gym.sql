@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2017 at 05:07 AM
+-- Generation Time: Jun 04, 2017 at 07:07 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -89,10 +89,57 @@ CREATE TABLE `membership` (
 --
 
 INSERT INTO `membership` (`mem_id`, `username`, `password`, `fname`, `lname`, `address`, `contact`, `role`) VALUES
-(1, 'Raymond', '123456', 'Phu', 'Nguyen', '8 Mount Street, Auckland.', 'phu.nguyen09995@gmail.com', 2),
-(2, 'Quinn', '123456', 'Quynh', 'Tran', '10 Mount Street, Auckland. ', 'trannhuquynh.acc01@gmail.com', 2),
-(3, 'admin', '123456', 'admin', 'tran', '10 Mount St., Auckland 1010.', 'ccd1724@autuni.ac.nz', 1),
-(5, 'Adam', '123456', 'Adam', 'Smith', '12 Mount St., Auckland.', 'adam-smith@gmail.com', 2);
+(1, 'root', '', 'Phu', 'Nguyen', '8 Mount Street, Auckland.', 'phu.nguyen09995@gmail.com', 2),
+(2, 'root', '', 'Quynh', 'Tran', '10 Mount Street, Auckland. ', 'trannhuquynh.acc01@gmail.com', 2),
+(3, 'steven-tran', '123', 'steven', 'tran', '100 Mount St., Auckland 1010.', 'steven-tran@gmail.com', 1),
+(5, 'Adam', '123456', 'Adam', 'Smith', '18 Mount St., Auckland.', 'adam-smith@gmail.com', 2),
+(6, 'raymond95', '1', 'raymond', 'nguyen', '', 'phu.nguyen09995@gmail.com', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `mem_id` int(11) NOT NULL,
+  `total_price` double(10,2) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  `status` enum('1','0') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `mem_id`, `total_price`, `created`, `modified`, `status`) VALUES
+(1, 5, 88.00, '2017-05-24 13:39:47', '2017-05-24 13:39:47', '1'),
+(2, 5, 222.16, '2017-05-24 13:42:09', '2017-05-24 13:42:09', '1'),
+(3, 5, 73.94, '2017-05-24 13:47:13', '2017-05-24 13:47:13', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_id` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `quantity` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`) VALUES
+(1, 1, '0004', 1),
+(2, 2, '0001', 4),
+(3, 3, '0002', 2);
 
 -- --------------------------------------------------------
 
@@ -114,9 +161,32 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `price`, `colour`, `description`, `img`) VALUES
-('0001', 'Incredible by Victoria Sport Bra', 55.54, 'Almost Nude', 'Tackle high-intensity workouts in a truly Incredible maximum-support sport bra with breathable padding and a flexible underwire you cannot feel, plus fully adjustable straps and stay-cool Body Wick fabric.', 'images/products/0001.jpg'),
-('0002', 'Caged Racerback Sport Bra', 36.97, 'Black', 'Strong is clearly sexy in a sport bra combining light, removable padding and breathable mesh with an ultra-strappy caged back.', 'images/products/0002.jpg'),
-('0003', 'The Player Racerback Sport Bra', 30.55, 'White', 'Join Team VS in a medium-support sport bra with a logo band and a comfy racerback in smooth Body-Wick fabric to keep you cool, from cycling to circuit training.', 'images/products/0003.jpg');
+('1', 'Incredible by Victoria Sport Bra', 55.54, 'Almost Nude', 'Tackle high-intensity workouts in a truly Incredible maximum-support sport bra with breathable padding and a flexible underwire you cannot feel, plus fully adjustable straps and stay-cool Body Wick fabric.', 'images/products/0001.jpg'),
+('2', 'Caged Racerback Sport Bra', 36.97, 'Black', 'Strong is clearly sexy in a sport bra combining light, removable padding and breathable mesh with an ultra-strappy caged back.', 'images/products/0002.jpg'),
+('3', 'The Player Racerback Sport Bra', 30.55, 'White', 'Join Team VS in a medium-support sport bra with a logo band and a comfy racerback in smooth Body-Wick fabric to keep you cool, from cycling to circuit training.', 'images/products/0003.jpg'),
+('4', 'Essentials Linear Sweatshirt', 88.00, 'All Black', 'Crafted from a cotton-rich weave, the sweatshirt is detailed with the brand\'s Performance logo on the front. ', 'images/products/0004.jpg'),
+('5', 'Test', 45.32, 'Blue', 'No Description', 'images/products/Users-User-icon.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_rating`
+--
+
+CREATE TABLE `product_rating` (
+  `rating_id` int(11) NOT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `rating_number` int(11) DEFAULT NULL,
+  `total_points` int(11) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1 = Block, 0 = Unblock'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `product_rating`
+--
+
+INSERT INTO `product_rating` (`rating_id`, `product_id`, `rating_number`, `total_points`, `status`) VALUES
+(1, 5, 1, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -172,10 +242,30 @@ ALTER TABLE `membership`
   ADD PRIMARY KEY (`mem_id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `mem_id` (`mem_id`);
+
+--
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_rating`
+--
+ALTER TABLE `product_rating`
+  ADD PRIMARY KEY (`rating_id`);
 
 --
 -- Indexes for table `trainer`
@@ -191,7 +281,7 @@ ALTER TABLE `trainer`
 -- AUTO_INCREMENT for table `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `blog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `blog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `comment`
 --
@@ -201,12 +291,27 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `membership`
 --
 ALTER TABLE `membership`
-  MODIFY `mem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `mem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `product_rating`
+--
+ALTER TABLE `product_rating`
+  MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `trainer`
 --
 ALTER TABLE `trainer`
-  MODIFY `trainer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `trainer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- Constraints for dumped tables
 --
@@ -216,6 +321,18 @@ ALTER TABLE `trainer`
 --
 ALTER TABLE `comment`
   ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`blog_id`) REFERENCES `blog` (`blog_id`);
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`mem_id`) REFERENCES `membership` (`mem_id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

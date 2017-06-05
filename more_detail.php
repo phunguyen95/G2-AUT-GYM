@@ -1,4 +1,15 @@
 <?php session_start();?>
+
+<?php
+    require_once ('conf/setting.php');
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+    // Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+?>
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -21,18 +32,60 @@
 <!---calender-style---->
 <link rel="stylesheet" href="css/jquery-ui.css" />
 <script type="text/javascript" src="js/cart-js.js"></script>
+<script type="text/javascript" src="rating.js"></script>
+<script language="javascript" type="text/javascript">
+$(function() {
+    $("#rating_star").codexworld_rating_widget({
+        starLength: '5',
+        initialValue: '',
+        callbackFunctionName: 'processRating',
+        imageDirectory: 'images/',
+        inputAttr: 'productID'
+    });
+});
+
+function processRating(val, attrVal){
+    //alert("value: "+val+" productID: "+attrVal);
+    $.ajax({
+        type: 'POST',
+        url: 'rating.php',
+        data: 'productID='+attrVal+'&ratingPoints='+val, 
+        success : function() {
+           alert('You have rated '+val+' to this product');
+        }
+    });
+}
+</script>
+<style type="text/css">
+    .codexworld_rating_widget{
+        padding: 0px;
+        margin: 0px;
+        float: left;
+    }
+    .codexworld_rating_widget li{
+        line-height: 0px;
+        width: 28px;
+        height: 28px;
+        padding: 0px;
+        margin: 0px;
+        margin-left: 2px;
+        list-style: none;
+        float: left;
+        cursor: pointer;
+    }
+    .codexworld_rating_widget li span{
+        display: none;
+    }
+
+    .overall-rating{font-size: 14px;color: #8e8d8d;}
+   
+</style>
+
 <!---//calender-style---->                
 </head>
 <body>
-<?php
-    require_once ('conf/setting.php');
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
-    // Check connection
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
-        
-?>
+
+
 <!-- start header_bottom -->
 <?php require "social-media-row.php"; ?>
 <!-- end header_bottom -->
@@ -89,43 +142,62 @@
             <input type="button" id="total_items" value="">
           </span></a>   
         </div>
+
+        <div style="height: 70px"><a href="product.php"> << Back to Product page</a></div>
         <?php
+
             $id = $_GET['p'];
             $sql = "SELECT * FROM products WHERE id = '$id'";
+
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {
-                while($row = mysqli_fetch_assoc($result)) {     
+                while($row = mysqli_fetch_assoc($result)) {
+
+                    $query = "SELECT rating_number, FORMAT((total_points / rating_number),1) as average_rating FROM product_rating WHERE product_id = $id AND status = 1";
+                    $result2 = mysqli_query($conn, $query);
+                    $ratingRow = mysqli_fetch_assoc($result2);
+
                     echo   '<div style="width: 100%; height: 660px">
                                 <div style="float: left; width: 45%;"><img src="'.$row["img"].'" class="img-responsive" alt="a" /></div>
                                 <div style"float: left: width:5%">&nbsp;</div>
                                 <div style="float: left: width:50%; text-align: justify;">
-                                    <h2>'.$row["id"].'</h2><h2 id="'.$row["id"].'_name">'.$row["name"].'</h2>
+                                    <h2 id="'.$row["id"].'_name">'.$row["name"].'</h2>
+                                    <br>
+                                    <div class="overall-rating">(This product is ratting <span id="avgrat">'.$ratingRow['average_rating'].'</span>
+                                    based on <span id="totalrat">'.$ratingRow['rating_number'].'</span> rating)</span></div>
+                                    <br>
+                                    <h3>
+                                        <form method="POST" action="cartAction.php?action=addToCart&id='.$row["id"].'">
+                                            <p class="btn-add">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                <div><input type="submit" style="color: black" value="Add to cart" class="btnAddAction" /></div>
+                                            </p> 
+                                        </form>
+                                    </h3>
+                                    <br>
                                     <h2 id="'.$row["id"].'_price" class="price-text-color">NZD $'.$row["price"].'</h5>
                                     <b>Colour:</b> '.$row["colour"].'<br>
                                     <b>Description</b><br>
-                                    <div>'.$row["description"].'
+                                    <div>'.$row["description"].'<br><br>
+
+                                    <input name="rating" value="0" id="rating_star" type="hidden" productID="'.$row["id"].'" />
+                                   
+                                   
                                 </div>
+
                                 <br>
-                                
-                                <form method="POST" action="cartAction.php?action=addToCart&id='.$row["id"].'">
-                                <div style="float: left;"><p class="btn-add">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <div><input type="submit" style="color: black" value="Add to cart" class="btnAddAction" /></div>
-                                    </p>
-                                </div>
-                                </form>
-                                
-                                <br><br>
-                                <div style="float: right;"><a href="product.php">Back to Product page</a></div>
-                            </div>
+                               
 
                             <div class="clearfix"></div>
                             </div>';
                 }
-            } else {
+            }else {
                 echo "Up comming...";
             }
+           
+
+            
         ?>
 
     </div>

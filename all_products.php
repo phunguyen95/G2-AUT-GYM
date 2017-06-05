@@ -1,9 +1,17 @@
 
 <?php
+    require_once ('conf/setting.php');
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+    // Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
     
     $sql = "SELECT * FROM products";
+    $result = mysqli_query($conn, $sql);
 
-    foreach ($dbo->query($sql) as $row) {
+    while($row = mysqli_fetch_assoc($result)) {
     ?>
         <div class="col-sm-4">
                 <div class="col-item" <?php echo 'id="'.$row["id"].'"'?>>
@@ -13,6 +21,7 @@
                             <div class="price col-md-6">
                                 <?php 
                                 echo '<h5>'.$row["name"].'</h5>
+                                      <h5>Color: '.$row["colour"].'</h5>
                                       <h5>NZD $'.$row["price"].'</h5>' 
                                 ?>
 
