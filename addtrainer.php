@@ -410,16 +410,17 @@
       </div>
       <!-- /.panel-heading -->
 
-      <div class="col-lg-4">
-        <div class="panel panel-default">
+
          
           <!-- /.panel-heading -->
           <div class="panel-body">
-            <div class="list-group">
+          
      
                  <form action="insert_trainer_process.php" method="post" enctype="multipart/form-data">
             <h2><strong>Add Trainers</strong></h2><br>
-            <table>
+                                <div class="table-responsive">          
+
+            <table class="table">
                 <tr>
                     <td class="add">Full Name<span style="color: red">*</span>: </td>
                     <td><input type="text" name="fullname" style="width: 160px" pattern= "[a-zA-Z0-9,.! ]+" title="can only contain alphanumeric chacracters including space, comma, period (full stop) and exclamation point" required></td>
@@ -460,18 +461,18 @@
             </table>
             <br/>
             <table>
+
                 <tr>
-                    <td><input type="submit" value="Submit" style="border-radius: 10px; border: 1.5px solid black" id="checkBtn" name="insert"></td>
-                    <td><input type="reset" value="Reset" style="border-radius: 10px; border: 1.5px solid black"></td>
+                    <td><input type="submit" value="Submit" class="btn btn-primary" name="insert"></td>
+                    <td><input type="reset" value="Reset" class="btn btn-danger"></td>
                 </tr>
             </table>
         </form>
-          
+          </div>
             </div>
 
             <!-- /.list-group -->
-          </div>
-      </div></div></div></div></div></body>
+     </div></div></div></body>
 
 <!-- /#wrapper -->
 

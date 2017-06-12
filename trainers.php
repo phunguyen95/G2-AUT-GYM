@@ -42,7 +42,8 @@
                 if(isset($_SESSION["lname"])){
                     echo '<li><a href="#">Hi '.$_SESSION["lname"].'</a>
                              <ul>
-                                <li><a href="profile.php">View Profile</a></li> 
+                                <li><a href="profile.php">View Profile</a></li>
+                                <li><a href="change_password.php">Change password</a></li>
                                 <li><a href="logout.php">Log-out</a></li>
                              </ul>
                           </li>';

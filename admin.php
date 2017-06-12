@@ -26,6 +26,7 @@
 
   <!-- Morris Charts CSS -->
   <link href="bower_components/morrisjs/morris.css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
   <!-- Custom Fonts -->
   <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -45,9 +46,35 @@
 
 </style>
 </head>
+<script>
+$(document).ready(function() {
 
+        $(".delete_class").click(function(){
+            var tr = $(this).closest('tr'),
+                del_id = $(this).attr('id');
+
+            $.ajax({
+            type:'POST',
+                url: "delete_page.php?delete_id="+ del_id,
+                success:function(result){
+                    tr.fadeOut(1000, function(){
+                        $(this).remove();
+                    });
+                }
+            });
+        });
+      });
+</script>
 <body>
-
+<?php
+    session_start();
+    require_once ('conf/setting.php');
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    // Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }    
+?>
 <div id="wrapper">
 
   <!-- Navigation -->
@@ -94,10 +121,10 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i></a>
           <ul class="dropdown-menu dropdown-tasks">
-            <li> <a href="#"><div><p><strong>Task 1</strong><span class="pull-right text-muted">40% Complete</span></p>
+            <li> <a href="#"><div><p><strong>Register function</strong><span class="pull-right text-muted">100% complete</span></p>
                   <div class="progress progress-striped active">
-                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                      <span class="sr-only">40% Complete (success)</span>
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                      <span class="sr-only">100% Complete (success)</span>
                     </div>
                   </div>
                 </div>
@@ -108,11 +135,11 @@
               <a href="#">
                 <div>
                   <p>
-                    <strong>Task 2</strong>
-                    <span class="pull-right text-muted">20% Complete</span>
+                    <strong>Shopping Cart</strong>
+                    <span class="pull-right text-muted">100% Complete</span>
                   </p>
                   <div class="progress progress-striped active">
-                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                       <span class="sr-only">20% Complete</span>
                     </div>
                   </div>
@@ -124,11 +151,11 @@
               <a href="#">
                 <div>
                   <p>
-                    <strong>Task 3</strong>
-                    <span class="pull-right text-muted">60% Complete</span>
+                    <strong>Admin Function </strong>
+                    <span class="pull-right text-muted">80% Complete</span>
                   </p>
                   <div class="progress progress-striped active">
-                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
                       <span class="sr-only">60% Complete (warning)</span>
                     </div>
                   </div>
@@ -265,7 +292,7 @@
             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Checkout<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
-                <a href="AdminCart.jsp">List Receipt</a>
+                <a href="listProduct.php">List Receipt</a>
               </li>
               <li>
                 <a href="listorder.jsp">List Order</a>
@@ -382,19 +409,65 @@
 
               <a href="#" class="list-group-item">
                 <i class="fa fa-twitter fa-fw"></i> New User:
+                  <?php
+                 require_once ('conf/setting.php');
+                  $conn = mysqli_connect($servername, $username, $password, $dbname);
+                  // Check connection
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+                  $sql="SELECT username FROM membership ORDER BY mem_id DESC LIMIT 1";
+                  $result = mysqli_query($conn, $sql);
+                    if (mysqli_num_rows($result) > 0) {
+                    while($row = mysqli_fetch_assoc($result)) {     
+                     echo $row['username'] ;
+                    }
+                  }
+             ?>
                 <span class="pull-right text-muted small"></span>
                 </span>
               </a>
               <a href="#" class="list-group-item">
                 <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
-                                    <span class="pull-right text-muted small"><em>></em>
+                  <?php
+                 require_once ('conf/setting.php');
+                  $conn = mysqli_connect($servername, $username, $password, $dbname);
+                  // Check connection
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+                  $sql="SELECT created FROM orders ORDER BY id DESC LIMIT 1";
+                  $result = mysqli_query($conn, $sql);
+                    if (mysqli_num_rows($result) > 0) {
+                    while($row = mysqli_fetch_assoc($result)) {     
+                     echo $row['created'] ;
+                    }
+                  }
+             ?>
+               <span class="pull-right text-muted small"><em></em>
                                     </span>
               </a>
               <a href="#" class="list-group-item">
-                <i class="fa fa-money fa-fw"></i> Payment Received
-                                    <span class="pull-right text-muted small"><em>></em>
+                <i class="fa fa-money fa-fw"></i> Payment Received:
+                <?php
+                 require_once ('conf/setting.php');
+                  $conn = mysqli_connect($servername, $username, $password, $dbname);
+                  // Check connection
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+                  $sql="SELECT total_price FROM orders ORDER BY id DESC LIMIT 1";
+                  $result = mysqli_query($conn, $sql);
+                    if (mysqli_num_rows($result) > 0) {
+                    while($row = mysqli_fetch_assoc($result)) {     
+                     echo "".$row['total_price'] ."NZD";
+                    }
+                  }
+             ?>
+                                    <span class="pull-right text-muted small"><em></em>
                                     </span>
               </a>
+
             </div>
             <!-- /.list-group -->
             <a href="#" class="btn btn-default btn-block">View All Alerts</a>
@@ -404,12 +477,71 @@
         <!-- /.panel-body -->
       </div>
       <!-- /.panel -->
+
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-bell fa-fw"></i> List of member
+          </div>
+
+          <!-- /.panel-heading -->
+          <div class="panel-body">
+            <div class="list-group">
+              <?php
+               echo "<table class='table table-hover'>";
+                      echo "<thead>";
+                      echo "<tr>";
+                      echo "<th>Member ID</th>";
+                      echo "<th>Username</th>";
+                      echo "<th>Password </th>";
+                      echo "<th>First name</th>";
+                      echo "<th>Last Name</th>";
+                      echo "<th>Address</th>";
+                      echo "<th>Contact </th>";
+                      echo "</tr>";
+                      echo "<thead>";
+                       echo "<tbody>";
+                     echo "</tbody>";
+
+                $sql="select * from membership";
+                $result = mysqli_query($conn, $sql);
+                   if (mysqli_num_rows($result) > 0) {
+                    while($row = mysqli_fetch_assoc($result)) {     
+                     echo "<tr>";
+                     echo "<td>" .$row['mem_id']. "</td>";
+                       echo "<td>".$row['username']. "</td>";
+                     echo "<td>".$row['password'] ."</td>";
+                     echo "<td>".$row['fname']. "</td>";
+                     echo "<td>".$row['lname']. "</td>";
+                     echo "<td>".$row['address']. "</td>";
+                     echo "<td>".$row['contact']. "</td>";  
+                        echo "<td><button class='btn btn-sm btn-danger delete_class' id='".$row['mem_id']."' >DELETE</button></td>";
+
+                     echo "</tr>";
+                   }
+
+                 }
+                                      echo "</table>";
+
+              ?>
+
+            </div>
+            <!-- /.list-group -->
+          </div>
+          <!-- /.panel-body -->
+        </div>
+        <!-- /.panel-body -->
+      </div>
+      <!-- /.panel -->
     </div>
+    </div>
+
     <!-- /.col-lg-8 -->
     <!-- /.panel -->
     <!-- /.panel -->
 
   </div>
+
   <!-- /.col-lg-4 -->
 </div>
 <!-- /.row -->

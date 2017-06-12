@@ -1,10 +1,13 @@
-<?php session_start();?>
+
 <!DOCTYPE HTML>
 <html>
 <head>
 <title>Gym Website Template</title>
-<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-<link href="css/style.css" rel='stylesheet' type='text/css' />
+
+<link rel="stylesheet" href="css/bootstrap.css">
+
+  <link rel="stylesheet" href="css/style.css"/>
+
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -14,8 +17,32 @@
 <!-- grid-slider -->
 <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
 <script type="text/javascript" src="js/jquery.contentcarousel.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- //grid-slider -->
 </head>
+
+<script>
+$(document).ready(function() {
+
+$("body").on('click', '.btn-primary', function (id) {
+            var id_blog= $(this).attr('id').replace('button', 'author');
+                var author = $('#author'+id_blog).val();
+                var comment=$('#comment'+id_blog).val();
+                
+
+           	 $.ajax({
+            type:'POST',
+                url: "insertcomment.php?id_blog="+ id_blog+"&author="+author+"&comment="+comment,
+                success:function(result){
+    location.reload(true);
+                }
+            });
+        });
+      });
+</script>
 <body>
     <!-- start header_bottom -->
    <?php require "social-media-row.php";?>
@@ -41,6 +68,7 @@
                     echo '<li><a href="#">Hi '.$_SESSION["lname"].'</a>
                              <ul>
                                 <li><a href="profile.php">View Profile</a></li>
+                                <li><a href="change_password.php">Change password</a></li>
                                 <li><a href="logout.php">Log-out</a></li>
                              </ul>
                           </li>';
@@ -67,11 +95,17 @@
 		  	   <div class="col-md-8">
 		  	     	<div class="blog_single_grid">
 		  	     	<?php
-						require_once ('config.php');
-					    
+						require_once ('conf/setting.php');
+					    $conn = mysqli_connect($servername, $username, $password, $dbname);
+					    // Check connection
+					    if (!$conn) {
+					        die("Connection failed: " . mysqli_connect_error());
+					    }    
+
 					  	$sql = "SELECT * FROM blog";
-					    
-					    foreach ($dbo->query($sql) as $row) {
+					    $result = mysqli_query($conn, $sql);
+
+					    while($row = mysqli_fetch_assoc($result)){
 					    	?>
 							  <ul class="links_blog">
 							  	<h3><a href="#"><?php echo $row['title'];?></a></h3>
@@ -128,7 +162,7 @@
 										            </div>
 										            <div class="clear"></div>
 										        </li>
-									    	<?php	
+									  <?php	
 									    }
 								 	?>
 							        
@@ -136,24 +170,28 @@
 				  			 	<h4>Leave a comment</h4>
 				  			  	<form id="commentform">
 								     <p class="comment-form-author">
-										<input id="author" name="author" type="text" value="" size="30" aria-required="true" placeholder="Name">
+										<input id="author<?php echo $row["blog_id"]?>" name="author" type="text" value="" size="30" aria-required="true" placeholder="Name">
 									 </p>
 									 <p class="comment-form-email">
 										<input id="email" name="email" type="text" value="" size="30" aria-required="true" placeholder="Email">
 									 </p>
 									 <p class="comment-form-comment">
-										<textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" placeholder="Comment"></textarea>
+										<textarea id="comment<?php echo $row["blog_id"]?>"  name="comment" cols="45" rows="8" aria-required="true" placeholder="Comment"></textarea>
 									 </p>
 									 <p class="form-submit">
-							           <input name="submit" type="submit" id="submit" value="Send">
+									 		
+							            <button type="button" class="btn btn-primary" attrcomment="" attrauthor="" id='<?php echo $row["blog_id"];?>'>Send</button>
+							            
+			         			
 									 </p>
 									 <div class="clear"></div>
 							   	</form>
 							  </ul>
+							    	
 					    	<?php
 
 					    }
-					    
+					    mysqli_close($conn);
 					?>
 
 			    </div>

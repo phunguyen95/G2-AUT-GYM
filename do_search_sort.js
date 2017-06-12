@@ -11,7 +11,7 @@ function getData(divID, key)  {
     if(xhr) {
 	    var place = document.getElementById(divID);
 	 
-	    				var url="search_data.php";
+	    				var url="search_data.phpta.php";
 	    				url=url+"?key="+key;
 
 	    xhr.open("POST",url,true);

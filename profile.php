@@ -7,10 +7,7 @@
 <html>
 <head>
 <title>Gym Website Template</title>
-<script
-  src="https://code.jquery.com/jquery-1.12.4.min.js"
-  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-  crossorigin="anonymous"></script>
+
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 
 <link href="css/style.css" rel='stylesheet' type='text/css' />
@@ -58,6 +55,10 @@
 
 
 </style>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script language="JavaScript">
 function edit_field(id){
 
@@ -98,7 +99,7 @@ document.getElementById(address_id).innerHTML = "<input type=text id='" +data_ad
 var contact=document.getElementById(contact_id).innerHTML; // Read the present class
 document.getElementById(contact_id).innerHTML = "<input type=text id='" +data_contact+ "' value='"+contact+ "' >"; // 
 
-document.getElementById(sid).innerHTML = '<input type=button class="btn btn primary" value=Update onclick=ajax(' + id + ');>'; // Add different color to background
+document.getElementById(sid).innerHTML = '<input type=button class="btn btn-primary" value=Update onclick=ajax(' + id + ');>'; // Add different color to background
 } // end of function
 
 </script>
@@ -199,7 +200,7 @@ document.getElementById(sid).innerHTML = '<input type=button class="btn btn prim
                         <label>Password:</label>
                         <span class=\"datainfo\" id=$password_id>$row[password]</span>
                       </div>
-                      <div style=\"float: right\" id=$sid><input type=button value='Edit' onclick=edit_field($row[mem_id])></div>";
+                      <div style=\"float: right\" id=$sid><input type=button class='btn btn-primary' value='Edit' onclick=edit_field($row[mem_id])></div>";
 
                 }
                

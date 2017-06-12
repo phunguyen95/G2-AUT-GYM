@@ -5,7 +5,13 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title></title>
 	<link rel="stylesheet" href="">
-	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <link href="css/style-signin-form.css" rel='stylesheet' type='text/css' />
     
 </style>
@@ -34,26 +40,25 @@
                                 <a href="#" class="forgot-pass">Forgot Password</a>
                             </div>
                         </div>
+                        <button type="submit" id="button"  style="margin-left: 5%" class="btn btn-default regbutton"><a href="signup.html">Register </a></button>
                     </div>
                 </form>
-                <div class="row">
-                    <a href="signup.html"><button  type="submit" id="button" style="margin-left: 40%" class="btn btn-default regbutton">Register</button></a>
-                </div>
             </div>
         </div>
     </div>
-    <div class="posted-by">Homepage: <a href="index.php">Homepage</a></div></div>
+    <div class="posted-by">Homepage::<a href="index.php">Homepage</a></div>
+</div>
 
 	<script>
-    	$(document).ready(function () {
-            $('.forgot-pass').click(function(event) {
-              $(".pr-wrap").toggleClass("show-pass-reset");
-            }); 
-            
-            $('.pass-reset-submit').click(function(event) {
-              $(".pr-wrap").removeClass("show-pass-reset");
-            }); 
-        });
+	 $(document).ready(function () {
+    $('.forgot-pass').click(function(event) {
+      $(".pr-wrap").toggleClass("show-pass-reset");
+    }); 
+    
+    $('.pass-reset-submit').click(function(event) {
+      $(".pr-wrap").removeClass("show-pass-reset");
+    }); 
+});
 	</script>
 </body>
 </html>

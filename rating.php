@@ -25,12 +25,18 @@ if(isset($_POST['ratingPoints'])){
             $ratingNum = $prevRatingRow['rating_number'] + $ratingNum;
             $ratingPoints = $prevRatingRow['total_points'] + $ratingPoints;
             //Update rating data into the database
-            $sql = "UPDATE product_rating SET rating_number = '".$ratingNum."', total_points = '".$ratingPoints."' WHERE product_id = ".$productID."'";
-            if (mysqli_query($conn, $sql)) {
-                echo "<script>console.log(\"Record updated successfully\")</script>";
+            $sql = "UPDATE product_rating SET rating_number = '".$ratingNum."' , total_points = '".$ratingPoints."' WHERE product_id = '".$productID."'";
+           if (mysqli_query($conn, $sql)) {
+                                 echo "Success: " . $sql . "<br>" . mysqli_error($conn);
+
             } 
+            else
+            {
+                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            }
         }
-    }else{
+        }
+    else{
         $sql = "INSERT INTO product_rating (product_id,rating_number,total_points) VALUES('".$productID."','".$ratingNum."','".$ratingPoints."')";      
         if (mysqli_query($conn, $sql)) {
                 echo "<script>console.log(\"Record inserted successfully\")</script>";

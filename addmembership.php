@@ -403,15 +403,16 @@
 
             <!-- /.panel-heading -->
 
-      <div class="col-lg-4">
-        <div class="panel panel-default">
+     
          
           <!-- /.panel-heading -->
           <div class="panel-body">
-            <div class="list-group">
+          
                 <form action="insert_membership_process.php" method="post" enctype="multipart/form-data">
                   <h2><strong>Add Membership</strong></h2><br>
-                  <table>
+                    <div class="table-responsive">          
+
+                  <table class="table">
                       <tr>
                           <td class="add">Username<span style="color: red">*</span>: </td>
                           <td><input type="text" name="username" style="width: 160px" pattern= "[a-zA-Z0-9,.! ]+" title="can only contain alphanumeric chacracters including space, comma, period (full stop) and exclamation point" required></td>
@@ -441,11 +442,12 @@
                           <td><input type="text" id="contact" name="contact" style="width: 303px" required></input></td>
                       </tr> 
                   </table>
+                  </div>  
                   <br/>
                   <table>
                       <tr>
-                          <td><input type="submit" value="Submit" style="border-radius: 10px; border: 1.5px solid black" id="checkBtn" name="insert"></td>
-                          <td><input type="reset" value="Reset" style="border-radius: 10px; border: 1.5px solid black"></td>
+                          <td><input type="submit" value="Submit" class="btn btn-primary" id="checkBtn" name="insert"></td>
+                          <td><input type="reset" value="Reset" class="btn btn-danger"></td>
                       </tr>
                   </table>
               </form>
@@ -453,12 +455,9 @@
              
               
               
-            </div>
             <!-- /.list-group -->
            
-          </div>
-          <!-- /.panel-body -->
-        </div>
+        
         <!-- /.panel-body -->
       </div>
       <!-- /.panel -->

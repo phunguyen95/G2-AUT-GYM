@@ -42,6 +42,7 @@
                     echo '<li><a href="#">Hi '.$_SESSION["lname"].'</a>
                              <ul>
                                 <li><a href="profile.php">View Profile</a></li>
+                                <li><a href="change_password.php">Change password</a></li>
                                 <li><a href="logout.php">Log-out</a></li>
                              </ul>
                           </li>';
@@ -57,7 +58,7 @@
 	</div>
 	<!-- end menu -->
     <div class="main">
-     <iframe width="100%" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Auckland&amp;aq=0&amp;oq=un&amp;sll=174.7660614,-36.8546199&amp;sspn=174.7660614,107.138672&amp;ie=UTF8&amp;hq=&amp;hnear=United+Kingdom&amp;ll=174.7660614,-36.8546199&amp;spn=174.7660614,174.7660614&amp;t=m&amp;z=2&amp;output=embed"> </iframe><br /><small><a href="http://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=United+Kingdom&amp;aq=0&amp;oq=un&amp;sll=174.7660614,-36.8546199&amp;sspn=174.7660614,174.7660614&amp;ie=UTF8&amp;hq=&amp;hnear=Auckland&amp;ll=174.7660614,-36.8546199&amp;spn=174.7660614,68.554687&amp;t=m&amp;z=2" style="color:#666;font-size:12px;text-align:left"> </a></small>
+       <iframe width="100%" height="420" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=United+Kingdom&amp;aq=0&amp;oq=un&amp;sll=37.0625,-95.677068&amp;sspn=48.956293,107.138672&amp;ie=UTF8&amp;hq=&amp;hnear=United+Kingdom&amp;ll=55.378051,-3.435973&amp;spn=135.795411,68.554687&amp;t=m&amp;z=2&amp;output=embed"> </iframe><br /><small><a href="http://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=United+Kingdom&amp;aq=0&amp;oq=un&amp;sll=37.0625,-95.677068&amp;sspn=48.956293,107.138672&amp;ie=UTF8&amp;hq=&amp;hnear=United+Kingdom&amp;ll=55.378051,-3.435973&amp;spn=135.795411,68.554687&amp;t=m&amp;z=2" style="color:#666;font-size:12px;text-align:left"> </a></small>
         <div class="about_banner_wrap">
       	   <h1 class="m_11">Contact</h1>
       	</div>

@@ -63,7 +63,7 @@
 
 				if (mysqli_query($conn, $sql)) {
 				    echo"<script>alert('SUCCESSFULLY ADDED');</script>";
-				    header("location:addproduct.php"); 
+				    
 				} else {	
 				    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 				    header("location:addproduct.php"); 

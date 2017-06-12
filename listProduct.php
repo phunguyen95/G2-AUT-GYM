@@ -26,10 +26,11 @@
   <link href="dist/css/sb-admin-2.css" rel="stylesheet">
 
   <!-- Morris Charts CSS -->
-  <link href="bower_components/morrisjs/morris.css" rel="stylesheet">
 
   <!-- Custom Fonts -->
   <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,6 +44,23 @@
         height: 50px;
     }
     </style>
+    <script>
+    $(document).ready(function() {
+
+        $(".assign_class").click(function(){
+            var tr = $(this).closest('tr'),
+               order_id = $(this).attr('id');
+
+            $.ajax({
+            type:'POST',
+                url: "assign.php?order_id="+ order_id,
+                success:function(result){
+                  $( ".assign_class" ).remove().fadeOut(3000);
+                }
+            });
+        });
+});
+    </script>
 </head>
 <?php
       require_once ('conf/setting.php');
@@ -413,47 +431,45 @@
          
           <!-- /.panel-heading -->
           <div class="panel-body">
-     
-               <form action="insert_product_process.php" method="post" enctype="multipart/form-data">
-                  <h2><strong>Add Product</strong></h2><br>
-  <div class="table-responsive">          
+       <?php
+               echo "<table class='table table-hover'>";
+                      echo "<thead>";
+                      echo "<tr>";
+                      echo "<th>Order ID</th>";
+                      echo "<th>Member ID</th>";
+                      echo "<th>total_price </th>";
+                      echo "<th>Date order</th>";
+                      echo "<th>Date confirmed</th>";
+                      echo "<th>Status</th>";
+                      echo "</tr>";
+                      echo "<thead>";
+                       echo "<tbody>";
+                     echo "</tbody>";
 
-                  <table class="table">
-                      <tr>
-                          <td class="add_product">Product Code<span style="color: red">*</span>: </td>
-                          <td><input type="text" name="id" id="id" style="width: 150px" pattern="[0-9]{4}" title=" Must have 4 characters in length. Hint: 0001" required></td>
-                      </tr>
-                      <tr>
-                          <td class="add_product">Name of Product<span style="color: red">*</span>: </td>
-                          <td><input type="text" name="name" style="width: 303px" pattern= "[a-zA-Z0-9,.! ]+" title="can only contain alphanumeric chacracters including space, comma, period (full stop) and exclamation point" required></td>
-                      </tr>
-                      <tr>
-                          <td class="add_product">Price of Product<span style="color: red">*</span>: </td>
-                          <td><input type="text" name="price" style="width: 303px" pattern= "[0-9,.]+" title="can only contain numbers and period (full stop)" required></td>
-                      </tr>
-                      <tr>
-                          <td class="add_product">Colour of Product<span style="color: red">*</span>: </td>
-                          <td><input type="text" name="colour" style="width: 303px" pattern= "[a-zA-Z0-9,.! ]+" title="can only contain alphanumeric chacracters including space, comma, period (full stop) and exclamation point" required></td>
-                      </tr>
-                      <tr>
-                          <td class="add_product">Description<span style="color: red">*</span>: </td>
-                          <td><input type="text" id="description" name="description" required></input></td>
-                      </tr> 
-                      <tr>
-                          <td class="add_product">Image<span style="color: red">*</span>:</td>
-                          <td><input type="file" name="fileToUpload" id="fileToUpload" accept="image/*"></td>
-                      </tr>
-                     
-                  </table>
-                  <br/>
-                  <table>
-                      <tr>
-                          <td><input type="submit" value="Insert" class="btn btn-primary" id="checkBtn" name="insert"></td>
-                          <td><input type="reset" value="Reset" class="btn btn-danger"></td>
-                      </tr>
-                  </table>
-                  </div>
-              </form>
+                $sql="select * from orders";
+                $result = mysqli_query($conn, $sql);
+                   if (mysqli_num_rows($result) > 0) {
+                    while($row = mysqli_fetch_assoc($result)) {     
+                     echo "<tr>";
+                     echo "<td>" .$row['id']. "</td>";
+                       echo "<td>".$row['mem_id']. "</td>";
+                     echo "<td>".$row['total_price'] ."NZD$</td>";
+                     echo "<td>".$row['created']. "</td>";
+                     echo "<td>".$row['modified']. "</td>";
+                     echo "<td>".$row['status']. "</td>";
+                     if($row['status']=="Unconfirmed Transaction")
+                     {
+                        echo "<td><button class='btn btn-sm btn-danger assign_class' id='".$row['id']."' >Confirm Order</button></td>";
+                     }
+
+                     echo "</tr>";
+                   }
+
+                 }
+                                      echo "</table>";
+
+              ?>
+
           
 
             <!-- /.list-group -->
@@ -471,9 +487,7 @@
 <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
 <!-- Morris Charts JavaScript -->
-<script src="bower_components/raphael/raphael-min.js"></script>
-<script src="bower_components/morrisjs/morris.min.js"></script>
-<script src="js/morris-data.js"></script>
+
 
 <!-- Custom Theme JavaScript -->
 <script src="dist/js/sb-admin-2.js"></script>

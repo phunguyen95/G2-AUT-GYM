@@ -49,6 +49,7 @@
                     echo '<li><a href="#">Hi '.$_SESSION["lname"].'</a>
                              <ul>
                                 <li><a href="profile.php">View Profile</a></li>
+                                <li><a href="change_password.php">Change password</a></li>
                                 <li><a href="logout.php">Log-out</a></li>
                              </ul>
                           </li>';
@@ -93,11 +94,17 @@
 		     
     <!--PHP code -->  
     <?php
+		require_once ('conf/setting.php');
+	    $conn = mysqli_connect($servername, $username, $password, $dbname);
+	    // Check connection
+	    if (!$conn) {
+	        die("Connection failed: " . mysqli_connect_error());
+	    }    
 
-	    require_once ('config.php');
       	$sql = "SELECT * FROM trainer";
-        
-        foreach ($dbo->query($sql) as $row) {
+        $result = mysqli_query($conn, $sql);
+
+        while($row = mysqli_fetch_assoc($result)) {
 
         	switch ($row['trainer_id']){
         		case 1: 
@@ -333,7 +340,7 @@
 	    
 	   </div>
     </div>
-  
+    <?php mysqli_close($conn);?>
    	<div class="login">
     <?php require "why-join.php"; ?>
     </div>
